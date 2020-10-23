@@ -8,11 +8,10 @@ class CardHand extends React.Component {
 		const { owner } = this.props;
 
 		const items = owner.hand.map((id, index) => {
-			let key = `card-${index}`;
 			let card = CardsDatabase.cards.find((card) => card.id === id);
 
 			return (
-				<Card key={key} id={card.id} />
+				<Card key={`card-${index}`} card={card} />
 			);
 		});
 
