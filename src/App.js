@@ -15,7 +15,8 @@ class App extends React.Component {
 		super(props);
 
 		this.state = {
-			turn: 'captain'
+			turn: 'captain',
+			streak: 1
 		}
 
 		this.handleNextTurn = this.nextTurn.bind(this);
@@ -31,6 +32,7 @@ class App extends React.Component {
 		}
 
 		this.setState({
+			streak: this.state.streak + 1,
 			turn: newTurn
 		});
 	}
@@ -38,7 +40,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-				<Hud game={window.game} />
+				<Hud captain={window.game.captain} crew={window.game.crew} streak={this.state.streak} />
 				<CardHand owner={window.game.captain} turn={this.state.turn} />
 				<EndTurn turn={this.state.turn} onClick={this.handleNextTurn} />
 			</React.Fragment>
