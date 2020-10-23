@@ -3,14 +3,32 @@ import './Effect.css';
 import Names from '../data/Names.json';
 
 class Effect extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			lead: window.game.lead
+		};
+	}
+
 	render() {
-		let { id, effect } = this.props;
+		let { lead } = this.state;
+		const { id, effect } = this.props;
 
 		let title = Names[id];
-		if (id == 'mine') {
-			title = Names['captain'];
-		} else if (id == 'theirs') {
-			title = Names['crew'];
+
+		if (lead === 'captain') {
+			if (id === 'mine') {
+				title = Names['captain'];
+			} else if (id === 'theirs') {
+				title = Names['crew'];
+			}
+		} else {
+			if (id === 'mine') {
+				title = Names['crew'];
+			} else if (id === 'theirs') {
+				title = Names['captain'];
+			}
 		}
 
 		let effectText = effect.toString();
