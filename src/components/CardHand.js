@@ -1,22 +1,27 @@
 import React from 'react';
-import CardsDatabase from '../data/CardsDatabase.json';
+
 import Card from './Card';
+
+import CardsDatabase from '../data/CardsDatabase.json';
+
 import './CardHand.css';
 
 class CardHand extends React.Component {
 	render() {
-		const { owner } = this.props;
+		const { owner, turn } = this.props;
 
 		const items = owner.hand.map((id, index) => {
 			let card = CardsDatabase.cards.find((card) => card.id === id);
 
 			return (
-				<Card key={`card-${index}`} card={card} />
+				<Card key={`card-${index}`} card={card} turn={turn} />
 			);
 		});
 
 		return (
-			<ul className="m-cardHand">{items}</ul>
+			<ul className="m-cardHand">
+				{items}
+			</ul>
 		);
 	}
 }

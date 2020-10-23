@@ -5,14 +5,6 @@ import Names from '../data/Names.json';
 import './EndTurn.css';
 
 class EndTurn extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			turn: props.turn
-		};
-	}
-
 	render() {
 		const { turn, onClick } = this.props;
 

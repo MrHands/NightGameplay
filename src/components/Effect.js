@@ -1,23 +1,16 @@
 import React from 'react';
-import './Effect.css';
+
 import Names from '../data/Names.json';
 
+import './Effect.css';
+
 class Effect extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			lead: window.game.lead
-		};
-	}
-
 	render() {
-		let { lead } = this.state;
-		const { id, effect } = this.props;
+		const { id, effect, turn } = this.props;
 
 		let title = Names[id];
 
-		if (lead === 'captain') {
+		if (turn === 'captain') {
 			if (id === 'mine') {
 				title = Names['captain'];
 			} else if (id === 'theirs') {

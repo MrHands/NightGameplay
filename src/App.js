@@ -15,23 +15,23 @@ class App extends React.Component {
 		super(props);
 
 		this.state = {
-			lead: 'captain'
+			turn: 'captain'
 		}
 
 		this.handleNextTurn = this.nextTurn.bind(this);
 	}
 
 	nextTurn() {
-		let newLead;
+		let newTurn;
 
-		if (this.state.lead === 'captain') {
-			newLead = 'crew';
+		if (this.state.turn === 'captain') {
+			newTurn = 'crew';
 		} else {
-			newLead = 'captain';
+			newTurn = 'captain';
 		}
 
 		this.setState({
-			lead: newLead
+			turn: newTurn
 		});
 	}
 
@@ -39,8 +39,8 @@ class App extends React.Component {
 		return (
 			<React.Fragment>
 				<Hud game={window.game} />
-				<CardHand owner={window.game.captain} />
-				<EndTurn turn={this.state.lead} onClick={this.handleNextTurn} />
+				<CardHand owner={window.game.captain} turn={this.state.turn} />
+				<EndTurn turn={this.state.turn} onClick={this.handleNextTurn} />
 			</React.Fragment>
 		);
 	}
