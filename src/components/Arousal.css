@@ -1,0 +1,6 @@
+.m-arousal {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	grid-column-gap: 12px;
+	align-items: center;
+}

@@ -18,10 +18,10 @@ class Card extends React.Component {
 
 	render() {
 		return (
-			<ul className="m-card">
+			<li className="m-card">
 				<h1>{this.state.title}</h1>
 				<h2>{this.state.type}</h2>
-			</ul>
+			</li>
 		);
 	}
 }
