@@ -2,11 +2,19 @@ import React from 'react';
 
 import Effect from './Effect';
 
+import Names from '../data/Names.json';
+
 import './EffectBlock.css';
 
 class EffectBlock extends React.Component {
 	render() {
 		const { effect, turn, streak } = this.props;
+
+		let condition;
+		if (effect.condition) {
+			let { stat, check, value } = effect.condition;
+			condition = <h2>{Names[stat]} {Names[check]} {value}</h2>;
+		}
 
 		let effectItems = [];
 
@@ -15,9 +23,12 @@ class EffectBlock extends React.Component {
 		}
 
 		return (
-			<ul className="m-effectBlock">
-				{effectItems}
-			</ul>
+			<React.Fragment>
+				{condition}
+				<ul className="m-effectBlock">
+					{effectItems}
+				</ul>
+			</React.Fragment>
 		);
 	}
 }

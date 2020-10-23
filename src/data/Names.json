@@ -2,7 +2,12 @@
 	"captain": "Captain",
 	"crew": "Crew Member",
 	"dominant": "Dominant",
+	"equal": "==",
+	"greater-than-equal": ">=",
+	"greater-than": ">",
 	"intimate": "Intimate",
+	"lesser-than-equal": "<=",
+	"lesser-than": "<",
 	"passionate": "Passionate",
 	"streak": "Streak"
 }
