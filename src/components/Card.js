@@ -10,11 +10,9 @@ class Card extends React.Component {
 			<li className="m-card">
 				<h1>{card.title}</h1>
 				<h2>{card.type}</h2>
-				<ul className="m-effectList">
-					{card.effects.map((effect) => {
-						return <EffectBlock effect={effect} />;
-					})}
-				</ul>
+				{card.effects.map((effect) => {
+					return <EffectBlock effect={effect} />;
+				})}
 			</li>
 		);
 	}

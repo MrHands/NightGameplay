@@ -9,10 +9,10 @@ window.game.captain.hand = [ 'passionate-1', 'passionate-1', 'passionate-1', 'do
 
 function App() {
 	return (
-		<div className="App">
+		<React.Fragment>
 			<Hud game={window.game} />
 			<CardHand owner={window.game.captain} />
-		</div>
+		</React.Fragment>
 	);
 }
 
