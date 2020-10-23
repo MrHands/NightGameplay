@@ -1,0 +1,30 @@
+{
+	"cards": [
+		{
+			"id": "passionate-1",
+			"title": "Passionate 1",
+			"type": "passionate",
+			"connection": "intimate",
+			"effects": [
+				{
+					"stats": {
+						"mine": 1,
+						"theirs": 2
+					}
+				},
+				{
+					"condition": {
+						"stat": "streak",
+						"check": "greater-than-equal",
+						"value": 3
+					},
+					"stats": {
+						"mine": 2,
+						"theirs": 3,
+						"streak": 1
+					}
+				}
+			]
+		}
+	]
+}
