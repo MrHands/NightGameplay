@@ -1,5 +1,6 @@
 import React from 'react';
-import CardsDatabase from './data/CardsDatabase.json';
+import CardsDatabase from '../data/CardsDatabase.json';
+import './Card.css';
 
 class Card extends React.Component {
 	componentWillMount() {
@@ -17,10 +18,10 @@ class Card extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<ul className="m-card">
 				<h1>{this.state.title}</h1>
 				<h2>{this.state.type}</h2>
-			</div>
+			</ul>
 		);
 	}
 }

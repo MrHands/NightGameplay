@@ -25,6 +25,55 @@
 					}
 				}
 			]
+		},
+		{
+			"id": "dominant-1",
+			"title": "Dominant 1",
+			"type": "dominant",
+			"connection": "passionate",
+			"effects": [
+				{
+					"stats": {
+						"mine": 1
+					}
+				},
+				{
+					"condition": {
+						"stat": "streak",
+						"check": "greater-than-equal",
+						"value": 5
+					},
+					"stats": {
+						"mine": 1,
+						"theirs": 2,
+						"streak": -1
+					}
+				}
+			]
+		},
+		{
+			"id": "intimate-1",
+			"title": "Intimate 1",
+			"type": "intimate",
+			"connection": "dominant",
+			"effects": [
+				{
+					"stats": {
+						"theirs": 2
+					}
+				},
+				{
+					"condition": {
+						"stat": "streak",
+						"check": "less-than-equal",
+						"value": 2
+					},
+					"stats": {
+						"theirs": 4,
+						"streak": 3
+					}
+				}
+			]
 		}
 	]
 }
