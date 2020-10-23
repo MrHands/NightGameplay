@@ -29,9 +29,9 @@ class Card extends React.Component {
 				valid = streak > value;
 			} else if (check === 'greater-than-equal') {
 				valid = streak >= value;
-			}  else if (check === 'lesser-than') {
+			}  else if (check === 'less-than') {
 				valid = streak < value;
-			} else if (check === 'lesser-than-equal') {
+			} else if (check === 'less-than-equal') {
 				valid = streak <= value;
 			}
 

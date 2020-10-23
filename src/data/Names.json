@@ -6,8 +6,8 @@
 	"greater-than-equal": ">=",
 	"greater-than": ">",
 	"intimate": "Intimate",
-	"lesser-than-equal": "<=",
-	"lesser-than": "<",
+	"less-than-equal": "<=",
+	"less-than": "<",
 	"passionate": "Passionate",
 	"streak": "Streak"
 }
