@@ -14,6 +14,7 @@ class GameState {
 		this.lead = 'captain';
 		this.captain = new Player('captain', 'Captain');
 		this.crew = new Player('crew', 'Crew Member');
+		this.streak = 1;
 	}
 };
 

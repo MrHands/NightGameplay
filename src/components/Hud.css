@@ -1,0 +1,5 @@
+.o-hud {
+	display: grid;
+	grid-template-columns: 2fr 48px 2fr;
+	grid-column-gap: 12px;
+}
