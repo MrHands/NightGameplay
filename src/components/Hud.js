@@ -8,11 +8,11 @@ class Hud extends React.Component {
 		let { game } = this.props;
 
 		return (
-			<navigation className="o-hud">
+			<div className="o-hud">
 				<Arousal player={game.captain} />
 				<StreakCounter value={game.streak} />
 				<Arousal player={game.crew} />
-			</navigation>
+			</div>
 		);
 	}
 }
