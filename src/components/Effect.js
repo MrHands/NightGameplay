@@ -1,9 +1,17 @@
 import React from 'react';
 import './Effect.css';
+import Names from '../data/Names.json';
 
 class Effect extends React.Component {
 	render() {
-		let { text, effect } = this.props;
+		let { id, effect } = this.props;
+
+		let title = Names[id];
+		if (id == 'mine') {
+			title = Names['captain'];
+		} else if (id == 'theirs') {
+			title = Names['crew'];
+		}
 
 		let effectText = effect.toString();
 		if (effect >= 0) {
@@ -12,8 +20,8 @@ class Effect extends React.Component {
 
 		return (
 			<li className="a-effect">
-				<h2>{text}</h2>
-				<h2>{effectText}</h2>
+				<div>{title}</div>
+				<div>{effectText}</div>
 			</li>
 		);
 	}
