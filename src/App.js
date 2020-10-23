@@ -38,11 +38,13 @@ class App extends React.Component {
 	}
 
 	render() {
+		const { turn, streak } = this.state;
+
 		return (
 			<React.Fragment>
-				<Hud captain={window.game.captain} crew={window.game.crew} streak={this.state.streak} />
-				<CardHand owner={window.game.captain} turn={this.state.turn} />
-				<EndTurn turn={this.state.turn} onClick={this.handleNextTurn} />
+				<Hud captain={window.game.captain} crew={window.game.crew} streak={streak} />
+				<CardHand owner={window.game.captain} turn={turn} streak={streak} />
+				<EndTurn turn={turn} onClick={this.handleNextTurn} />
 			</React.Fragment>
 		);
 	}

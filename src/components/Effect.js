@@ -6,7 +6,7 @@ import './Effect.css';
 
 class Effect extends React.Component {
 	render() {
-		const { id, effect, turn } = this.props;
+		const { id, effect, turn, streak } = this.props;
 
 		let title = Names[id];
 
@@ -24,7 +24,7 @@ class Effect extends React.Component {
 			}
 		}
 
-		let effectText = effect.toString();
+		let effectText = (effect * streak).toString();
 		if (effect >= 0) {
 			effectText = '+' + effectText;
 		}
