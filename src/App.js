@@ -1,12 +1,13 @@
 import React from 'react';
 
+import Button from './components/Button';
 import CardHand from './components/CardHand';
-import EndTurn from './components/EndTurn';
 import Hud from './components/Hud';
 import Table from './components/Table';
 import Player from './Player';
 
 import CardsDatabase from './data/CardsDatabase.json';
+import Names from './data/Names.json';
 
 import './App.css';
 
@@ -39,6 +40,7 @@ class App extends React.Component {
 
 		this.handlePlayCard = this.playCard.bind(this);
 		this.handleNextTurn = this.nextTurn.bind(this);
+		this.handleResolveRound = this.resolveRound.bind(this);
 	}
 
 	playCard(event) {
@@ -61,17 +63,25 @@ class App extends React.Component {
 
 	nextTurn() {
 		const { turn } = this.state;
-		let newTurn;
 
 		if (turn === 'captain') {
-			newTurn = 'crew';
+			this.setState({
+				turn: 'crew'
+			});
 		} else {
-			newTurn = 'captain';
+			this.setState({
+				turn: 'captain'
+			});
 		}
+	}
+
+	resolveRound() {
+		const { streak } = this.state;
 
 		this.setState({
-			streak: this.state.streak + 1,
-			turn: newTurn
+			tableCardCaptain: '',
+			tableCardCrew: '',
+			streak: streak + 1,
 		});
 	}
 
@@ -84,8 +94,14 @@ class App extends React.Component {
 			<React.Fragment>
 				<Hud captain={captain} crew={crew} streak={streak} />
 				<Table cardCaptain={tableCardCaptain} cardCrew={tableCardCrew} turn={turn} streak={streak} />
+				<h1>{`${Names[turn]}'s turn`}</h1>
 				<CardHand owner={captain} turn={turn} streak={streak} onPlay={this.handlePlayCard} />
-				<EndTurn turn={turn} onClick={this.handleNextTurn} />
+				<Button onClick={this.handleNextTurn}>
+					End turn
+				</Button>
+				<Button onClick={this.handleResolveRound}>
+					Resolve round
+				</Button>
 			</React.Fragment>
 		);
 	}
