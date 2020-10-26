@@ -49,11 +49,19 @@ class App extends React.Component {
 		let id = event.target.getAttribute('card-id');
 
 		if (turn === 'captain') {
+			let player = this.state.captain;
+			player.hand = player.hand.filter(c => c !== id);
+
 			this.setState({
+				captain: player,
 				tableCardCaptain: id
 			});
 		} else {
+			let player = this.state.crew;
+			player.hand = player.hand.filter(c => c !== id);
+
 			this.setState({
+				crew: player,
 				tableCardCrew: id
 			});
 		}
