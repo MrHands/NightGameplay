@@ -24,7 +24,14 @@ class Effect extends React.Component {
 			}
 		}
 
-		let effectText = (effect * streak).toString();
+		let effectText;
+		
+		if (['mine', 'theirs'].indexOf(id) > -1) {
+			effectText = (effect * streak).toString();
+		} else {
+			effectText = effect.toString();
+		}
+
 		if (effect >= 0) {
 			effectText = '+' + effectText;
 		}
