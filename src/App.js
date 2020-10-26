@@ -84,9 +84,17 @@ class App extends React.Component {
 	}
 
 	resolveRound() {
-		const { streak } = this.state;
+		const { captain, crew, tableCardCaptain, tableCardCrew, turn, streak } = this.state;
+
+		let cardTableCaptain = CardsDatabase.cards.find((card) => card.id === tableCardCaptain);
+		let cardTableCrew = CardsDatabase.cards.find((card) => card.id === tableCardCrew);
+
+		captain.applyCard(cardTableCaptain, turn, streak);
+		crew.applyCard(cardTableCrew, turn, streak);
 
 		this.setState({
+			captain: captain,
+			crew: crew,
 			tableCardCaptain: '',
 			tableCardCrew: '',
 			streak: streak + 1,

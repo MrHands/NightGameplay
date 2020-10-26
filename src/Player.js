@@ -6,7 +6,11 @@ class Player {
 		this.arousal = 0;
 		this.deck = [];
 		this.hand = [];
-	}
+    }
+    
+    applyCard(card, turn, streak) {
+        this.arousal += streak;
+    }
 };
 
 export default Player;
