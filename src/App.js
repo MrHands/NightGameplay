@@ -90,12 +90,14 @@ class App extends React.Component {
 
 		console.log(`tableCardCaptain ${tableCardCaptain} tableCardCrew ${tableCardCrew}`);
 
+		let hand = (turn === 'captain') ? captain : crew;
+
 		return (
 			<React.Fragment>
 				<Hud captain={captain} crew={crew} streak={streak} />
 				<Table cardCaptain={tableCardCaptain} cardCrew={tableCardCrew} turn={turn} streak={streak} />
 				<h1>{`${Names[turn]}'s turn`}</h1>
-				<CardHand owner={captain} turn={turn} streak={streak} onPlay={this.handlePlayCard} />
+				<CardHand owner={hand} turn={turn} streak={streak} onPlay={this.handlePlayCard} />
 				<Button onClick={this.handleNextTurn}>
 					End turn
 				</Button>

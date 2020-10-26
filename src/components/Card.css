@@ -1,10 +1,24 @@
 .m-card {
+	display: grid;
 	min-width: 200px;
+	min-height: 300px;
 	padding: 12px;
 	border: 2px solid blue;
 }
 
-.m-card.-empty {
+.m-card__title {
+	margin: 0;
+}
+
+.m-card__type {
+	margin: 0;
+}
+
+.m-card__connection {
+	margin: 0;
+}
+
+.m-card.-none {
 	border-style: dashed;
 }
 

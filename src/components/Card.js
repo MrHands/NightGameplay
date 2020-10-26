@@ -51,10 +51,10 @@ class Card extends React.Component {
 
 		return (
 			<li className="m-card" card-id={card.id} onClickCapture={onPlay}>
-				<h1>{card.title}</h1>
-				<h2>{Names[card.type]}</h2>
-				<EffectBlock effect={effect} turn={turn} streak={streak} />
-				<h2>{Names[card.connection]}</h2>
+				<h1 className="m-card__title">{card.title}</h1>
+				<h2 className="m-card__type">{Names[card.type]}</h2>
+				<EffectBlock className="m-card__effects" effect={effect} turn={turn} streak={streak} />
+				<h2 className="m-card__connection">{Names[card.connection]}</h2>
 			</li>
 		);
 	}
