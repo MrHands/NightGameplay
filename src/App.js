@@ -3,6 +3,7 @@ import React from 'react';
 import CardHand from './components/CardHand';
 import EndTurn from './components/EndTurn';
 import Hud from './components/Hud';
+import Table from './components/Table';
 import Player from './Player';
 
 import CardsDatabase from './data/CardsDatabase.json';
@@ -16,6 +17,10 @@ class App extends React.Component {
 		this.state = {
 			captain: new Player('captain', 'Captain'),
 			crew: new Player('crew', 'Crew Member'),
+			table: {
+				captain: '',
+				crew: '',
+			},
 			turn: 'captain',
 			streak: 1
 		};
@@ -53,11 +58,12 @@ class App extends React.Component {
 	}
 
 	render() {
-		const { captain, crew, turn, streak } = this.state;
+		const { captain, crew, table, turn, streak } = this.state;
 
 		return (
 			<React.Fragment>
 				<Hud captain={captain} crew={crew} streak={streak} />
+				<Table table={table} turn={turn} streak={streak} />
 				<CardHand owner={captain} turn={turn} streak={streak} />
 				<EndTurn turn={turn} onClick={this.handleNextTurn} />
 			</React.Fragment>

@@ -2,13 +2,22 @@ import React from 'react';
 
 import EffectBlock from './EffectBlock';
 
+import CardsDatabase from '../data/CardsDatabase.json';
 import Names from '../data/Names.json';
 
 import './Card.css';
 
 class Card extends React.Component {
 	render() {
-		const { card, turn, streak } = this.props;
+		const { id, turn, streak } = this.props;
+
+		let card = CardsDatabase.cards.find((card) => card.id === id);
+		if (!card) {
+			return (
+				<li className="m-card -none">
+				</li>
+			);
+		}
 
 		let defaultEffect = card.effects.find((effect) => {
 			return !effect.condition;

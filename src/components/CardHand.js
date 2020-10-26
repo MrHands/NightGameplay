@@ -2,8 +2,6 @@ import React from 'react';
 
 import Card from './Card';
 
-import CardsDatabase from '../data/CardsDatabase.json';
-
 import './CardHand.css';
 
 class CardHand extends React.Component {
@@ -11,10 +9,8 @@ class CardHand extends React.Component {
 		const { owner, turn, streak } = this.props;
 
 		const items = owner.hand.map((id, index) => {
-			let card = CardsDatabase.cards.find((card) => card.id === id);
-
 			return (
-				<Card key={`card-${index}`} card={card} turn={turn} streak={streak} />
+				<Card key={`card-${index}`} id={id} turn={turn} streak={streak} />
 			);
 		});
 
