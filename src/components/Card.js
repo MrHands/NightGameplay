@@ -9,7 +9,7 @@ import './Card.css';
 
 class Card extends React.Component {
 	render() {
-		const { id, turn, streak } = this.props;
+		const { id, turn, streak, onPlay } = this.props;
 
 		let card = CardsDatabase.cards.find((card) => card.id === id);
 		if (!card) {
@@ -50,7 +50,7 @@ class Card extends React.Component {
 		}
 
 		return (
-			<li className="m-card">
+			<li className="m-card" card-id={card.id} onClickCapture={onPlay}>
 				<h1>{card.title}</h1>
 				<h2>{Names[card.type]}</h2>
 				<EffectBlock effect={effect} turn={turn} streak={streak} />

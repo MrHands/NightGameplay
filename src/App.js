@@ -17,10 +17,8 @@ class App extends React.Component {
 		this.state = {
 			captain: new Player('captain', 'Captain'),
 			crew: new Player('crew', 'Crew Member'),
-			table: {
-				captain: '',
-				crew: '',
-			},
+			tableCardCaptain: '',
+			tableCardCrew: '',
 			turn: 'captain',
 			streak: 1
 		};
@@ -37,15 +35,35 @@ class App extends React.Component {
 		captain.hand = captain.deck.sort(() => Math.random() - 0.5).slice(0, 5);
 		crew.hand = captain.deck.sort(() => Math.random() - 0.5).slice(0, 5);
 
-		// handle next turn
+		// event handlers
 
+		this.handlePlayCard = this.playCard.bind(this);
 		this.handleNextTurn = this.nextTurn.bind(this);
 	}
 
+	playCard(event) {
+		const { turn } = this.state;
+
+		let id = event.target.getAttribute('card-id');
+
+		if (turn === 'captain') {
+			this.setState({
+				tableCardCaptain: id
+			});
+		} else {
+			this.setState({
+				tableCardCrew: id
+			});
+		}
+
+		console.log(`turn ${turn} id ${id}`);
+	}
+
 	nextTurn() {
+		const { turn } = this.state;
 		let newTurn;
 
-		if (this.state.turn === 'captain') {
+		if (turn === 'captain') {
 			newTurn = 'crew';
 		} else {
 			newTurn = 'captain';
@@ -58,13 +76,15 @@ class App extends React.Component {
 	}
 
 	render() {
-		const { captain, crew, table, turn, streak } = this.state;
+		const { captain, crew, tableCardCaptain, tableCardCrew, turn, streak } = this.state;
+
+		console.log(`tableCardCaptain ${tableCardCaptain} tableCardCrew ${tableCardCrew}`);
 
 		return (
 			<React.Fragment>
 				<Hud captain={captain} crew={crew} streak={streak} />
-				<Table table={table} turn={turn} streak={streak} />
-				<CardHand owner={captain} turn={turn} streak={streak} />
+				<Table cardCaptain={tableCardCaptain} cardCrew={tableCardCrew} turn={turn} streak={streak} />
+				<CardHand owner={captain} turn={turn} streak={streak} onPlay={this.handlePlayCard} />
 				<EndTurn turn={turn} onClick={this.handleNextTurn} />
 			</React.Fragment>
 		);

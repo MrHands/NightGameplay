@@ -7,3 +7,7 @@
 .m-card.-empty {
 	border-style: dashed;
 }
+
+.m-card * {
+	pointer-events: none;
+}
