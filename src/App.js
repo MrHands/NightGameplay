@@ -3,21 +3,36 @@ import React from 'react';
 import CardHand from './components/CardHand';
 import EndTurn from './components/EndTurn';
 import Hud from './components/Hud';
-import GameState from './GameState';
+import Player from './Player';
+
+import CardsDatabase from './data/CardsDatabase.json';
 
 import './App.css';
-
-window.game = new GameState();
-window.game.captain.hand = [ 'passionate-1', 'passionate-1', 'passionate-1', 'dominant-1', 'intimate-1' ];
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
+			captain: new Player('captain', 'Captain'),
+			crew: new Player('crew', 'Crew Member'),
 			turn: 'captain',
 			streak: 1
-		}
+		};
+
+		let { captain, crew } = this.state;
+
+		// set up decks
+
+		captain.deck = CardsDatabase.cards.map((card) => card.id);
+		crew.deck = CardsDatabase.cards.map((card) => card.id);
+
+		// set up hands
+
+		captain.hand = captain.deck.sort(() => Math.random() - 0.5).slice(0, 5);
+		crew.hand = captain.deck.sort(() => Math.random() - 0.5).slice(0, 5);
+
+		// handle next turn
 
 		this.handleNextTurn = this.nextTurn.bind(this);
 	}
@@ -38,12 +53,12 @@ class App extends React.Component {
 	}
 
 	render() {
-		const { turn, streak } = this.state;
+		const { captain, crew, turn, streak } = this.state;
 
 		return (
 			<React.Fragment>
-				<Hud captain={window.game.captain} crew={window.game.crew} streak={streak} />
-				<CardHand owner={window.game.captain} turn={turn} streak={streak} />
+				<Hud captain={captain} crew={crew} streak={streak} />
+				<CardHand owner={captain} turn={turn} streak={streak} />
 				<EndTurn turn={turn} onClick={this.handleNextTurn} />
 			</React.Fragment>
 		);
