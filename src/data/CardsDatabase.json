@@ -27,6 +27,84 @@
 			]
 		},
 		{
+			"id": "passionate-2",
+			"title": "Passionate 2",
+			"type": "passionate",
+			"connection": "intimate",
+			"effects": [
+				{
+					"stats": {
+						"mine": 1,
+						"theirs": 1
+					}
+				},
+				{
+					"condition": {
+						"stat": "streak",
+						"check": "greater-than-equal",
+						"value": 6
+					},
+					"stats": {
+						"mine": 3,
+						"theirs": 3,
+						"streak": 1
+					}
+				}
+			]
+		},
+		{
+			"id": "passionate-3",
+			"title": "Passionate 3",
+			"type": "passionate",
+			"connection": "intimate",
+			"effects": [
+				{
+					"stats": {
+						"mine": 1,
+						"theirs": 3
+					}
+				},
+				{
+					"condition": {
+						"stat": "streak",
+						"check": "greater-than-equal",
+						"value": 6
+					},
+					"stats": {
+						"mine": 2,
+						"theirs": 3,
+						"streak": 2
+					}
+				}
+			]
+		},
+		{
+			"id": "passionate-4",
+			"title": "Passionate 4",
+			"type": "passionate",
+			"connection": "intimate",
+			"effects": [
+				{
+					"stats": {
+						"mine": 2,
+						"theirs": 2
+					}
+				},
+				{
+					"condition": {
+						"stat": "streak",
+						"check": "greater-than-equal",
+						"value": 9
+					},
+					"stats": {
+						"mine": 4,
+						"theirs": 4,
+						"play-again": true
+					}
+				}
+			]
+		},
+		{
 			"id": "dominant-1",
 			"title": "Dominant 1",
 			"type": "dominant",
@@ -52,6 +130,81 @@
 			]
 		},
 		{
+			"id": "dominant-2",
+			"title": "Dominant 2",
+			"type": "dominant",
+			"connection": "passionate",
+			"effects": [
+				{
+					"stats": {
+						"mine": 2
+					}
+				},
+				{
+					"condition": {
+						"stat": "streak",
+						"check": "greater-than-equal",
+						"value": 5
+					},
+					"stats": {
+						"mine": 1,
+						"theirs": 3,
+						"streak": -1
+					}
+				}
+			]
+		},
+		{
+			"id": "dominant-3",
+			"title": "Dominant 3",
+			"type": "dominant",
+			"connection": "passionate",
+			"effects": [
+				{
+					"stats": {
+						"mine": 3
+					}
+				},
+				{
+					"condition": {
+						"stat": "streak",
+						"check": "greater-than-equal",
+						"value": 8
+					},
+					"stats": {
+						"mine": 1,
+						"theirs": 2,
+						"streak": -2
+					}
+				}
+			]
+		},
+		{
+			"id": "dominant-4",
+			"title": "Dominant 4",
+			"type": "dominant",
+			"connection": "passionate",
+			"effects": [
+				{
+					"stats": {
+						"mine": 4
+					}
+				},
+				{
+					"condition": {
+						"stat": "streak",
+						"check": "greater-than-equal",
+						"value": 8
+					},
+					"stats": {
+						"mine": 1,
+						"theirs": 4,
+						"streak": -2
+					}
+				}
+			]
+		},
+		{
 			"id": "intimate-1",
 			"title": "Intimate 1",
 			"type": "intimate",
@@ -70,7 +223,80 @@
 					},
 					"stats": {
 						"theirs": 4,
-						"streak": 3
+						"streak": 3,
+						"play-again": true
+					}
+				}
+			]
+		},
+		{
+			"id": "intimate-2",
+			"title": "Intimate 2",
+			"type": "intimate",
+			"connection": "dominant",
+			"effects": [
+				{
+					"stats": {
+						"theirs": 3
+					}
+				},
+				{
+					"condition": {
+						"stat": "streak",
+						"check": "less-than-equal",
+						"value": 4
+					},
+					"stats": {
+						"theirs": 3,
+						"streak": 2
+					}
+				}
+			]
+		},
+		{
+			"id": "intimate-3",
+			"title": "Intimate 3",
+			"type": "intimate",
+			"connection": "dominant",
+			"effects": [
+				{
+					"stats": {
+						"theirs": 1
+					}
+				},
+				{
+					"condition": {
+						"stat": "streak",
+						"check": "less-than-equal",
+						"value": 6
+					},
+					"stats": {
+						"theirs": 2,
+						"streak": 1
+					}
+				}
+			]
+		},
+		{
+			"id": "intimate-4",
+			"title": "Intimate 4",
+			"type": "intimate",
+			"connection": "dominant",
+			"effects": [
+				{
+					"stats": {
+						"theirs": 1
+					}
+				},
+				{
+					"condition": {
+						"stat": "streak",
+						"check": "less-than-equal",
+						"value": 8
+					},
+					"stats": {
+						"mine": 1,
+						"theirs": 2
 					}
 				}
 			]
