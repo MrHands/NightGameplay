@@ -1,3 +1,14 @@
 #root {
+	display: grid;
+	grid-row-gap: 16px;
 	padding: 12px;
+}
+
+.m-gameplay {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-column-gap: 16px;
+	list-style: none;
+	padding: 0;
+	margin: 0;
 }

@@ -114,12 +114,14 @@ class App extends React.Component {
 				<Table cardCaptain={tableCardCaptain} cardCrew={tableCardCrew} turn={turn} streak={streak} />
 				<h1>{`${Names[turn]}'s turn`}</h1>
 				<CardHand owner={hand} turn={turn} streak={streak} onPlay={this.handlePlayCard} />
-				<Button onClick={this.handleNextTurn}>
-					End turn
-				</Button>
-				<Button onClick={this.handleResolveRound}>
-					Resolve round
-				</Button>
+				<ul className="m-gameplay">
+					<Button onClick={this.handleNextTurn}>
+						End turn
+					</Button>
+					<Button onClick={this.handleResolveRound}>
+						Resolve round
+					</Button>
+				</ul>
 			</React.Fragment>
 		);
 	}
