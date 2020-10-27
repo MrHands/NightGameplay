@@ -110,9 +110,7 @@ class App extends React.Component {
 		// play first card
 
 		let firstCard = crew.hand[Math.floor(Math.random() * crew.hand.length)];
-		crew.hand = crew.hand.filter(c => c !== firstCard);
-
-		this.logEvent(`${Names['crew']} played ${firstCard}`);
+		crew.playCard(firstCard);
 
 		this.setState({
 			streak: 1,
@@ -124,26 +122,22 @@ class App extends React.Component {
 	}
 
 	playCard(event) {
-		const { turn } = this.state;
+		const { captain, crew, turn } = this.state;
 
 		let id = event.target.getAttribute('card-id');
 
-		this.logEvent(`${Names[turn]} played ${id}`);
-
 		if (turn === 'captain') {
-			let player = this.state.captain;
-			player.hand = player.hand.filter(c => c !== id);
+			captain.playCard(id);
 
 			this.setState({
-				captain: player,
+				captain: captain,
 				tableCardCaptain: id
 			});
 		} else {
-			let player = this.state.crew;
-			player.hand = player.hand.filter(c => c !== id);
+			crew.playCard(id);
 
 			this.setState({
-				crew: player,
+				crew: crew,
 				tableCardCrew: id
 			});
 		}

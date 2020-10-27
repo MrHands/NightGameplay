@@ -10,6 +10,12 @@ class Player {
 		this.deck = [];
 		this.hand = [];
 	}
+
+	playCard(card) {
+		this.logEvent(`${Names[this.id]} played ${card}`);
+
+		this.hand = this.hand.filter(c => c !== card);
+	}
 	
 	applyEffects(effects, turn, streak) {
 		for (const [key, value] of Object.entries(effects.stats)) {
