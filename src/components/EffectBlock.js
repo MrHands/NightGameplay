@@ -13,7 +13,7 @@ class EffectBlock extends React.Component {
 		let condition;
 		if (effect.condition) {
 			let { stat, check, value } = effect.condition;
-			condition = <h2>{Names[stat]} {Names[check]} {value}</h2>;
+			condition = <h2 className="m-effectBlock__condition">{Names[stat]} {Names[check]} {value}</h2>;
 		}
 
 		let effectItems = [];
@@ -23,12 +23,12 @@ class EffectBlock extends React.Component {
 		}
 
 		return (
-			<React.Fragment>
+			<div className="m-effectBlock">
 				{condition}
-				<ul className="m-effectBlock">
+				<ul className="a-effectList">
 					{effectItems}
 				</ul>
-			</React.Fragment>
+			</div>
 		);
 	}
 }

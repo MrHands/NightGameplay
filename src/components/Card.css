@@ -1,5 +1,12 @@
 .m-card {
 	display: grid;
+	grid-template-rows: repeat(2, min-content) 1fr min-content;
+	grid-row-gap: 8px;
+	grid-template-areas: 
+		"type     "
+		"title    "
+		"effects  "
+		"connect  ";
 	min-width: 200px;
 	min-height: 300px;
 	padding: 12px;
@@ -7,15 +14,26 @@
 }
 
 .m-card__title {
+	grid-area: title;
 	margin: 0;
+	font-size: 24px;
 }
 
 .m-card__type {
+	grid-area: type;
 	margin: 0;
+	font-size: 16px;
+	text-align: right;
+}
+
+.m-card__effects {
+	grid-area: effects;
 }
 
 .m-card__connection {
+	grid-area: connect;
 	margin: 0;
+	font-size: 16px;
 }
 
 .m-card.-none {
