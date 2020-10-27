@@ -12,3 +12,12 @@
 	padding: 0;
 	margin: 0;
 }
+
+.m-howToPlay {
+	max-width: 33vw;
+}
+
+.o-explain {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}

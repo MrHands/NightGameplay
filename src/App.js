@@ -277,7 +277,23 @@ class App extends React.Component {
 						New game
 					</Button>
 				</ul>
-				<LogBook logBook={logBook} />
+				<div className="o-explain">
+					<div className="m-howToPlay">
+						<h2>What is this?</h2>
+						<p>This is a prototype for the night gameplay in Up There They Love. You play as the Captain and you want to have a good time with your Crew Member.</p>
+						<p>Your goal is to fill the Crew Member's Arousal bar at the top of the screen. You do this by playing a card from your hand against the one on the table. Cards can affect both of your Arousal bars.</p>
+						<p>If the connection type from the previous card matches the type of your card, you will increase the streak. The higher the streak, the more points you will earn for each card played.</p>
+						<h2>How to play</h2>
+						<ul>
+							<li>Press "New game" to start playing</li>
+							<li>Select a card from your hand to place on the table</li>
+							<li>Press "End Turn" to end your turn and apply the card to the game</li>
+							<li>Select a card that the Crew Member will play</li>
+							<li>Keep playing until the bars fill up</li>
+						</ul>
+					</div>
+					<LogBook logBook={logBook} />
+				</div>
 			</React.Fragment>
 		);
 	}
