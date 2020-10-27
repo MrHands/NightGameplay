@@ -1,6 +1,8 @@
 .m-table {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+	display: grid;
+	grid-template-columns: repeat(2, min-content);
+	grid-column-gap: 12px;
+	list-style: none;
+	padding: 0;
+	margin: 0;
 }
