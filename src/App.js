@@ -24,6 +24,15 @@ class App extends React.Component {
 			streak: 1
 		};
 
+		// event handlers
+
+		this.handlePlayCard = this.playCard.bind(this);
+		this.handleNextTurn = this.nextTurn.bind(this);
+		this.handleResolveRound = this.resolveRound.bind(this);
+		this.handleStartNewGame = this.startNewGame.bind(this);
+	}
+
+	startNewGame() {
 		let { captain, crew } = this.state;
 
 		// set up decks
@@ -36,11 +45,18 @@ class App extends React.Component {
 		captain.hand = captain.deck.sort(() => Math.random() - 0.5).slice(0, 5);
 		crew.hand = captain.deck.sort(() => Math.random() - 0.5).slice(0, 5);
 
-		// event handlers
+		// play first card
 
-		this.handlePlayCard = this.playCard.bind(this);
-		this.handleNextTurn = this.nextTurn.bind(this);
-		this.handleResolveRound = this.resolveRound.bind(this);
+		let firstCard = crew.hand[Math.floor(Math.random() * crew.hand.length)];
+		crew.hand = crew.hand.filter(c => c !== firstCard);
+
+		this.setState({
+			streak: 1,
+			turn: 'captain',
+			captain: captain,
+			crew: crew,
+			tableCardCrew: firstCard
+		});
 	}
 
 	playCard(event) {
@@ -120,6 +136,9 @@ class App extends React.Component {
 					</Button>
 					<Button onClick={this.handleResolveRound}>
 						Resolve round
+					</Button>
+					<Button onClick={this.handleStartNewGame}>
+						New game
 					</Button>
 				</ul>
 			</React.Fragment>
