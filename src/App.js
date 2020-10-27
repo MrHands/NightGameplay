@@ -98,14 +98,13 @@ class App extends React.Component {
 
 		// set up decks
 
-		let allCards = CardsDatabase.cards.map((card) => card.id);
-		captain.deck = this.shuffleCards(allCards);
-		crew.deck = this.shuffleCards(allCards);
+		captain.deck = this.shuffleCards(CardsDatabase.cards.map((card) => card.id));
+		crew.deck = this.shuffleCards(CardsDatabase.cards.map((card) => card.id));
 
 		// set up hands
 
-		captain.hand = captain.deck.slice(0, 5);
-		crew.hand = captain.deck.slice(0, 5);
+		captain.fillHand();
+		crew.fillHand();
 
 		// play first card
 
@@ -199,6 +198,11 @@ class App extends React.Component {
 			tableCardCaptain = '';
 			turn = 'captain';
 		}
+
+		// fill hands
+
+		captain.fillHand();
+		crew.fillHand();
 
 		this.setState({
 			captain: captain,

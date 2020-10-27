@@ -11,6 +11,21 @@ class Player {
 		this.hand = [];
 	}
 
+	fillHand() {
+		console.log(this.id);
+
+		let newCards = Math.max(Math.min(5, this.deck.length), this.hand.length) - this.hand.length;
+		let cardList = this.deck.slice(0, newCards);
+
+		cardList.forEach(card => {
+			this.logEvent(`${Names[this.id]} added ${card} to hand`);
+
+			this.hand.push(card);
+		});
+
+		this.deck = this.deck.filter(card => cardList.indexOf(card) === -1);
+	}
+
 	playCard(card) {
 		this.logEvent(`${Names[this.id]} played ${card}`);
 
