@@ -28,7 +28,6 @@ class App extends React.Component {
 
 		this.handlePlayCard = this.playCard.bind(this);
 		this.handleNextTurn = this.nextTurn.bind(this);
-		this.handleResolveRound = this.resolveRound.bind(this);
 		this.handleStartNewGame = this.startNewGame.bind(this);
 		this.handleGetActiveEffectBlock = this.getActiveEffectBlock.bind(this);
 	}
@@ -69,18 +68,30 @@ class App extends React.Component {
 		return block;
 	}
 
+	shuffleCards(cards) {
+		let copy = [];
+
+		for (let n = cards.length; n > 0; n--) {
+			let i = Math.floor(Math.random() * n);
+			copy.push(cards.splice(i, 1)[0]);
+		}
+
+		return copy;
+	}
+
 	startNewGame() {
 		let { captain, crew } = this.state;
 
 		// set up decks
 
-		captain.deck = CardsDatabase.cards.map((card) => card.id);
-		crew.deck = CardsDatabase.cards.map((card) => card.id);
+		let allCards = CardsDatabase.cards.map((card) => card.id);
+		captain.deck = this.shuffleCards(allCards);
+		crew.deck = this.shuffleCards(allCards);
 
 		// set up hands
 
-		captain.hand = captain.deck.sort(() => Math.random() - 0.5).slice(0, 5);
-		crew.hand = captain.deck.sort(() => Math.random() - 0.5).slice(0, 5);
+		captain.hand = captain.deck.slice(0, 5);
+		crew.hand = captain.deck.slice(0, 5);
 
 		// play first card
 
@@ -123,35 +134,23 @@ class App extends React.Component {
 	}
 
 	nextTurn() {
-		const { turn } = this.state;
-
-		if (turn === 'captain') {
-			this.setState({
-				turn: 'crew'
-			});
-		} else {
-			this.setState({
-				turn: 'captain'
-			});
-		}
-	}
-
-	resolveRound() {
 		let { captain, crew, tableCardCaptain, tableCardCrew, turn, streak } = this.state;
 
-		// apply to captain
+		// apply captain card effects
 
 		let cardTableCaptain = CardsDatabase.cards.find((card) => card.id === tableCardCaptain);
 		let captainEffects = this.getActiveEffectBlock(cardTableCaptain);
 		captain.applyEffects(captainEffects, turn, streak);
+		crew.applyEffects(captainEffects, turn, streak);
 
-		// apply to crew
+		// apply crew member card effects
 
 		let cardTableCrew = CardsDatabase.cards.find((card) => card.id === tableCardCrew);
 		let crewEffects = this.getActiveEffectBlock(cardTableCrew);
 		crew.applyEffects(crewEffects, turn, streak);
+		captain.applyEffects(crewEffects, turn, streak);
 
-		// apply to streak
+		// apply card effects to streak
 
 		for (const [key, value] of Object.entries(captainEffects.stats)) {
 			if (key === 'streak') {
@@ -165,11 +164,22 @@ class App extends React.Component {
 			}
 		}
 
+		// change turns
+
+		if (turn === 'captain') {
+			tableCardCrew = '';
+			turn = 'crew';
+		} else {
+			tableCardCaptain = '';
+			turn = 'captain';
+		}
+
 		this.setState({
 			captain: captain,
 			crew: crew,
-			tableCardCaptain: '',
-			tableCardCrew: '',
+			tableCardCaptain: tableCardCaptain,
+			tableCardCrew: tableCardCrew,
+			turn: turn,
 			streak: streak + 1,
 		});
 	}
@@ -190,9 +200,6 @@ class App extends React.Component {
 				<ul className="m-gameplay">
 					<Button onClick={this.handleNextTurn}>
 						End turn
-					</Button>
-					<Button onClick={this.handleResolveRound}>
-						Resolve round
 					</Button>
 					<Button onClick={this.handleStartNewGame}>
 						New game
