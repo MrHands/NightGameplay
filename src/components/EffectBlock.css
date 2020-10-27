@@ -2,11 +2,15 @@
 	display: grid;
 	grid-row-gap: 8px;
 	box-sizing: border-box;
-	padding: 4px;
+	background: lightgray;
+	color: gray;
+	padding: 8px;
 	border: 2px solid transparent;
 }
 
 .m-effectBlock.-active {
+	background: white;
+	color: black;
 	border-color: gold;
 }
 
