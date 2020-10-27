@@ -29,6 +29,9 @@
 
 .m-card__effects {
 	grid-area: effects;
+	display: grid;
+	grid-row-gap: 8px;
+	grid-auto-rows: min-content;
 }
 
 .m-card__connection {

@@ -8,7 +8,7 @@ import './EffectBlock.css';
 
 class EffectBlock extends React.Component {
 	render() {
-		const { effect, turn, streak } = this.props;
+		const { active, effect, turn, streak } = this.props;
 
 		let condition;
 		if (effect.condition) {
@@ -23,7 +23,7 @@ class EffectBlock extends React.Component {
 		}
 
 		return (
-			<div className="m-effectBlock">
+			<div className={`m-effectBlock ${active ? '-active' : ''}`}>
 				{condition}
 				<ul className="a-effectList">
 					{effectItems}
