@@ -30,6 +30,7 @@ class App extends React.Component {
 		this.handleNextTurn = this.nextTurn.bind(this);
 		this.handleResolveRound = this.resolveRound.bind(this);
 		this.handleStartNewGame = this.startNewGame.bind(this);
+		this.handleGetActiveEffectBlock = this.getActiveEffectBlock.bind(this);
 	}
 
 	getActiveEffectBlock(card) {
@@ -136,13 +137,33 @@ class App extends React.Component {
 	}
 
 	resolveRound() {
-		const { captain, crew, tableCardCaptain, tableCardCrew, turn, streak } = this.state;
+		let { captain, crew, tableCardCaptain, tableCardCrew, turn, streak } = this.state;
+
+		// apply to captain
 
 		let cardTableCaptain = CardsDatabase.cards.find((card) => card.id === tableCardCaptain);
-		let cardTableCrew = CardsDatabase.cards.find((card) => card.id === tableCardCrew);
+		let captainEffects = this.getActiveEffectBlock(cardTableCaptain);
+		captain.applyEffects(captainEffects, turn, streak);
 
-		captain.applyCard(cardTableCaptain, turn, streak);
-		crew.applyCard(cardTableCrew, turn, streak);
+		// apply to crew
+
+		let cardTableCrew = CardsDatabase.cards.find((card) => card.id === tableCardCrew);
+		let crewEffects = this.getActiveEffectBlock(cardTableCrew);
+		crew.applyEffects(crewEffects, turn, streak);
+
+		// apply to streak
+
+		for (const [key, value] of Object.entries(captainEffects.stats)) {
+			if (key === 'streak') {
+				streak += value;
+			}
+		}
+
+		for (const [key, value] of Object.entries(crewEffects.stats)) {
+			if (key === 'streak') {
+				streak += value;
+			}
+		}
 
 		this.setState({
 			captain: captain,
@@ -158,14 +179,14 @@ class App extends React.Component {
 
 		console.log(`tableCardCaptain ${tableCardCaptain} tableCardCrew ${tableCardCrew}`);
 
-		let hand = (turn === 'captain') ? captain : crew;
+		let player = (turn === 'captain') ? captain : crew;
 
 		return (
 			<React.Fragment>
 				<Hud captain={captain} crew={crew} streak={streak} />
-				<Table cardCaptain={tableCardCaptain} cardCrew={tableCardCrew} turn={turn} streak={streak} />
+				<Table cardCaptain={tableCardCaptain} cardCrew={tableCardCrew} turn={turn} streak={streak} onResolve={this.handleGetActiveEffectBlock} />
 				<h1>{`${Names[turn]}'s turn`}</h1>
-				<CardHand owner={hand} turn={turn} streak={streak} onPlay={this.handlePlayCard} />
+				<CardHand player={player} turn={turn} streak={streak} onPlay={this.handlePlayCard} onResolve={this.handleGetActiveEffectBlock} />
 				<ul className="m-gameplay">
 					<Button onClick={this.handleNextTurn}>
 						End turn

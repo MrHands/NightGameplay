@@ -9,7 +9,7 @@ import './Card.css';
 
 class Card extends React.Component {
 	render() {
-		const { id, turn, streak, onPlay } = this.props;
+		const { id, turn, streak, onPlay, onResolve } = this.props;
 
 		let card = CardsDatabase.cards.find((card) => card.id === id);
 		if (!card) {
@@ -19,35 +19,7 @@ class Card extends React.Component {
 			);
 		}
 
-		let defaultEffect = card.effects.find((effect) => {
-			return !effect.condition;
-		});
-
-		let effect = defaultEffect;
-
-		let conditionalEffect = card.effects.find((effect) => {
-			return effect.condition;
-		});
-		if (conditionalEffect) {
-			let { check, value } = conditionalEffect.condition;
-
-			let valid = false;
-			if (check === 'equal') {
-				valid = streak === value;
-			} else if (check === 'greater-than') {
-				valid = streak > value;
-			} else if (check === 'greater-than-equal') {
-				valid = streak >= value;
-			}  else if (check === 'less-than') {
-				valid = streak < value;
-			} else if (check === 'less-than-equal') {
-				valid = streak <= value;
-			}
-
-			if (valid) {
-				effect = conditionalEffect;
-			}
-		}
+		let effect = onResolve(card);
 
 		return (
 			<li className="m-card" card-id={card.id} onClickCapture={onPlay}>

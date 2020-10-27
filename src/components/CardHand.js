@@ -6,11 +6,11 @@ import './CardHand.css';
 
 class CardHand extends React.Component {
 	render() {
-		const { owner, turn, streak, onPlay } = this.props;
+		const { player, turn, streak, onPlay, onResolve } = this.props;
 
-		const items = owner.hand.map((id, index) => {
+		const items = player.hand.map((id, index) => {
 			return (
-				<Card key={`card-${index}`} id={id} turn={turn} streak={streak} onPlay={onPlay} />
+				<Card key={`card-${index}`} id={id} player={player} turn={turn} streak={streak} onPlay={onPlay} onResolve={onResolve} />
 			);
 		});
 
