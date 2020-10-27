@@ -1,4 +1,17 @@
-.a-streakCounter {
-	background: gray;
+.m-streakCounter {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: lightgray;
+	font-size: 14px;
 	padding: 4px;
+}
+
+.m-streakCounter__name {
+	margin: 0;
+}
+
+.m-streakCounter__text {
+	margin: 0;
 }
