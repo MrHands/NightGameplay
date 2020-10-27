@@ -6,14 +6,12 @@ import './Table.css';
 
 class Table extends React.Component {
 	render() {
-		const { cardCaptain, cardCrew, turn, streak, onResolve } = this.props;
-		
-		console.log(`cardCaptain ${cardCaptain} cardCrew ${cardCrew}`);
+		const { cardPrevious, cardNext, turn, streak, onResolve } = this.props;
 
 		return (
 			<ul className="m-table">
-				<Card id={cardCaptain} turn={turn} streak={streak} onResolve={onResolve} />
-				<Card id={cardCrew} turn={turn} streak={streak} onResolve={onResolve} />
+				<Card id={cardPrevious} turn={turn} streak={streak} onResolve={onResolve} />
+				<Card id={cardNext} turn={turn} streak={streak} onResolve={onResolve} />
 			</ul>
 		);
 	}

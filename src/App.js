@@ -20,8 +20,8 @@ class App extends React.Component {
 			logBook: [],
 			captain: new Player('captain', 'Captain', this.logEvent),
 			crew: new Player('crew', 'Crew Member', this.logEvent),
-			tableCardCaptain: '',
-			tableCardCrew: '',
+			tableCardLeft: '',
+			tableCardRight: '',
 			round: 1,
 			turn: 'captain',
 			streak: 1,
@@ -122,7 +122,7 @@ class App extends React.Component {
 			streak: 1,
 			captain: captain,
 			crew: crew,
-			tableCardCrew: firstCard
+			tableCardLeft: firstCard
 		});
 	}
 
@@ -136,14 +136,14 @@ class App extends React.Component {
 
 			this.setState({
 				captain: captain,
-				tableCardCaptain: id
+				tableCardRight: id
 			});
 		} else {
 			crew.playCard(id);
 
 			this.setState({
 				crew: crew,
-				tableCardCrew: id
+				tableCardRight: id
 			});
 		}
 
@@ -151,29 +151,29 @@ class App extends React.Component {
 	}
 
 	nextTurn() {
-		let { captain, crew, tableCardCaptain, tableCardCrew, round, turn, streak } = this.state;
+		let { captain, crew, tableCardLeft, tableCardRight, round, turn, streak } = this.state;
 
-		// apply captain card effects
+		// apply previous card effects
 
-		let cardTableCaptain = CardsDatabase.cards.find((card) => card.id === tableCardCaptain);
-		let captainEffects = this.getActiveEffectBlock(cardTableCaptain);
-		this.logEvent(`Card: Applying ${tableCardCaptain} to ${Names['captain']}`);
-		captain.applyEffects(captainEffects, turn, streak);
-		this.logEvent(`Card: Applying ${tableCardCaptain} to ${Names['crew']}`);
-		crew.applyEffects(captainEffects, turn, streak);
+		let cardTableLeft = CardsDatabase.cards.find((card) => card.id === tableCardLeft);
+		let effectsLeft = this.getActiveEffectBlock(cardTableLeft);
+		this.logEvent(`Card: Applying ${tableCardLeft} to ${Names['captain']}`);
+		captain.applyEffects(effectsLeft, turn, streak);
+		this.logEvent(`Card: Applying ${tableCardLeft} to ${Names['crew']}`);
+		crew.applyEffects(effectsLeft, turn, streak);
 
-		// apply crew member card effects
+		// apply new card effects
 
-		let cardTableCrew = CardsDatabase.cards.find((card) => card.id === tableCardCrew);
-		let crewEffects = this.getActiveEffectBlock(cardTableCrew);
-		this.logEvent(`Card: Applying ${tableCardCrew} to ${Names['captain']}`);
-		captain.applyEffects(crewEffects, turn, streak);
-		this.logEvent(`Card: Applying ${tableCardCrew} to ${Names['crew']}`);
-		crew.applyEffects(crewEffects, turn, streak);
+		let cardTableRight = CardsDatabase.cards.find((card) => card.id === tableCardRight);
+		let effectsRight = this.getActiveEffectBlock(cardTableRight);
+		this.logEvent(`Card: Applying ${tableCardRight} to ${Names['captain']}`);
+		captain.applyEffects(effectsRight, turn, streak);
+		this.logEvent(`Card: Applying ${tableCardRight} to ${Names['crew']}`);
+		crew.applyEffects(effectsRight, turn, streak);
 
 		// apply card effects to streak
 
-		for (const [key, value] of Object.entries(captainEffects.stats)) {
+		for (const [key, value] of Object.entries(effectsLeft.stats)) {
 			if (key === 'streak') {
 				let from = streak;
 				streak += value;
@@ -182,7 +182,7 @@ class App extends React.Component {
 			}
 		}
 
-		for (const [key, value] of Object.entries(crewEffects.stats)) {
+		for (const [key, value] of Object.entries(effectsRight.stats)) {
 			if (key === 'streak') {
 				let from = streak;
 				streak += value;
@@ -195,43 +195,25 @@ class App extends React.Component {
 
 		let streakFrom = streak;
 
-		if (turn === 'captain') {
-			if (cardTableCrew.connection === cardTableCaptain.type) {
-				this.logEvent(`Connect: ${Names['crew']}'s ${cardTableCrew.connection} connection matches ${Names['captain']}'s ${cardTableCaptain.type} card`);
+		if (cardTableLeft.connection === cardTableRight.type) {
+			this.logEvent(`Connect: Previous connection ${cardTableLeft.connection} matches new ${cardTableRight.type} card`);
 
-				streak += 1;
-				this.logEvent(`Streak: Continued (${streakFrom} => ${streak})`);
-			} else {
-				this.logEvent(`Connect: ${Names['crew']}'s ${cardTableCrew.connection} connection does not match ${Names['captain']}'s ${cardTableCaptain.type} card`);
-
-				streak = 1;
-				this.logEvent(`Streak: Broken (${streakFrom} => ${streak})`);
-			}
+			streak += 1;
+			this.logEvent(`Streak: Continued (${streakFrom} => ${streak})`);
 		} else {
-			if (cardTableCaptain.connection === cardTableCrew.type) {
-				this.logEvent(`Connect: ${Names['captain']}'s ${cardTableCaptain.connection} connection matches ${Names['crew']}'s ${cardTableCrew.type} card`);
+			this.logEvent(`Connect: Previous connection ${cardTableLeft.connection} does not match new ${cardTableRight.type} card`);
 
-				streak += 1;
-				this.logEvent(`Streak: Continued (${streakFrom} => ${streak})`);
-			} else {
-				this.logEvent(`Connect: ${Names['captain']}'s ${cardTableCaptain.connection} connection does not match ${Names['crew']}'s ${cardTableCrew.type} card`);
-
-				streak = 1;
-				this.logEvent(`Streak: Broken (${streakFrom} => ${streak})`);
-			}
+			streak = 1;
+			this.logEvent(`Streak: Broken (${streakFrom} => ${streak})`);
 		}
 
-		// change turns
+		// change leading player
+
+		this.logEvent(`Table: Removed ${tableCardLeft}`);
 
 		if (turn === 'captain') {
-			this.logEvent(`Table: Removed ${Names['crew']}'s ${tableCardCrew}`);
-
-			tableCardCrew = '';
 			turn = 'crew';
 		} else {
-			this.logEvent(`Table: Removed ${Names['captain']}'s ${tableCardCaptain}`);
-
-			tableCardCaptain = '';
 			turn = 'captain';
 		}
 
@@ -248,8 +230,8 @@ class App extends React.Component {
 		this.setState({
 			captain: captain,
 			crew: crew,
-			tableCardCaptain: tableCardCaptain,
-			tableCardCrew: tableCardCrew,
+			tableCardLeft: tableCardRight,
+			tableCardRight: '',
 			round: round,
 			turn: turn,
 			streak: streak,
@@ -257,9 +239,7 @@ class App extends React.Component {
 	}
 
 	render() {
-		const { logBook, captain, crew, tableCardCaptain, tableCardCrew, turn, streak } = this.state;
-
-		console.log(`tableCardCaptain ${tableCardCaptain} tableCardCrew ${tableCardCrew}`);
+		const { logBook, captain, crew, tableCardLeft, tableCardRight, turn, streak } = this.state;
 
 		let player = (turn === 'captain') ? captain : crew;
 
@@ -267,7 +247,7 @@ class App extends React.Component {
 			<React.Fragment>
 				<Hud captain={captain} crew={crew} streak={streak} />
 				<h1>On the table</h1>
-				<Table cardCaptain={tableCardCaptain} cardCrew={tableCardCrew} turn={turn} streak={streak} onResolve={this.handleGetActiveEffectBlock} />
+				<Table cardPrevious={tableCardLeft} cardNext={tableCardRight} turn={turn} streak={streak} onResolve={this.handleGetActiveEffectBlock} />
 				<h1>{`${Names[turn]}'s hand`}</h1>
 				<CardHand player={player} turn={turn} streak={streak} onPlay={this.handlePlayCard} onResolve={this.handleGetActiveEffectBlock} />
 				<ul className="m-gameplay">
