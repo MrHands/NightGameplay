@@ -3,6 +3,7 @@ import React from 'react';
 import Button from './components/Button';
 import CardHand from './components/CardHand';
 import Hud from './components/Hud';
+import LogBook from './components/LogBook';
 import Table from './components/Table';
 import Player from './Player';
 
@@ -16,8 +17,9 @@ class App extends React.Component {
 		super(props);
 
 		this.state = {
-			captain: new Player('captain', 'Captain'),
-			crew: new Player('crew', 'Crew Member'),
+			logBook: [],
+			captain: new Player('captain', 'Captain', this.logEvent),
+			crew: new Player('crew', 'Crew Member', this.logEvent),
 			tableCardCaptain: '',
 			tableCardCrew: '',
 			turn: 'captain',
@@ -30,6 +32,16 @@ class App extends React.Component {
 		this.handleNextTurn = this.nextTurn.bind(this);
 		this.handleStartNewGame = this.startNewGame.bind(this);
 		this.handleGetActiveEffectBlock = this.getActiveEffectBlock.bind(this);
+	}
+
+	logEvent = (event) => {
+		let { logBook } = this.state;
+
+		logBook.push(event);
+
+		this.setState({
+			logBook: logBook
+		});
 	}
 
 	getActiveEffectBlock(card) {
@@ -82,6 +94,8 @@ class App extends React.Component {
 	startNewGame() {
 		let { captain, crew } = this.state;
 
+		this.logEvent(`New game started`);
+
 		// set up decks
 
 		let allCards = CardsDatabase.cards.map((card) => card.id);
@@ -98,6 +112,8 @@ class App extends React.Component {
 		let firstCard = crew.hand[Math.floor(Math.random() * crew.hand.length)];
 		crew.hand = crew.hand.filter(c => c !== firstCard);
 
+		this.logEvent(`${Names['crew']} played ${firstCard}`);
+
 		this.setState({
 			streak: 1,
 			turn: 'captain',
@@ -111,6 +127,8 @@ class App extends React.Component {
 		const { turn } = this.state;
 
 		let id = event.target.getAttribute('card-id');
+
+		this.logEvent(`${Names[turn]} played ${id}`);
 
 		if (turn === 'captain') {
 			let player = this.state.captain;
@@ -140,36 +158,50 @@ class App extends React.Component {
 
 		let cardTableCaptain = CardsDatabase.cards.find((card) => card.id === tableCardCaptain);
 		let captainEffects = this.getActiveEffectBlock(cardTableCaptain);
+		this.logEvent(`Applying ${tableCardCaptain} to ${Names['captain']}`);
 		captain.applyEffects(captainEffects, turn, streak);
+		this.logEvent(`Applying ${tableCardCaptain} to ${Names['crew']}`);
 		crew.applyEffects(captainEffects, turn, streak);
 
 		// apply crew member card effects
 
 		let cardTableCrew = CardsDatabase.cards.find((card) => card.id === tableCardCrew);
 		let crewEffects = this.getActiveEffectBlock(cardTableCrew);
-		crew.applyEffects(crewEffects, turn, streak);
+		this.logEvent(`Applying ${tableCardCrew} to ${Names['captain']}`);
 		captain.applyEffects(crewEffects, turn, streak);
+		this.logEvent(`Applying ${tableCardCrew} to ${Names['crew']}`);
+		crew.applyEffects(crewEffects, turn, streak);
 
 		// apply card effects to streak
 
 		for (const [key, value] of Object.entries(captainEffects.stats)) {
 			if (key === 'streak') {
+				let from = streak;
 				streak += value;
+
+				this.logEvent(`Added ${value} to streak (${from} => ${streak})`);
 			}
 		}
 
 		for (const [key, value] of Object.entries(crewEffects.stats)) {
 			if (key === 'streak') {
+				let from = streak;
 				streak += value;
+
+				this.logEvent(`Added ${value} to streak (${from} => ${streak})`);
 			}
 		}
 
 		// change turns
 
 		if (turn === 'captain') {
+			this.logEvent(`Removed ${Names['crew']}'s ${tableCardCrew} from table`);
+
 			tableCardCrew = '';
 			turn = 'crew';
 		} else {
+			this.logEvent(`Removed ${Names['captain']}'s ${tableCardCaptain} from table`);
+
 			tableCardCaptain = '';
 			turn = 'captain';
 		}
@@ -185,7 +217,7 @@ class App extends React.Component {
 	}
 
 	render() {
-		const { captain, crew, tableCardCaptain, tableCardCrew, turn, streak } = this.state;
+		const { logBook, captain, crew, tableCardCaptain, tableCardCrew, turn, streak } = this.state;
 
 		console.log(`tableCardCaptain ${tableCardCaptain} tableCardCrew ${tableCardCrew}`);
 
@@ -205,6 +237,7 @@ class App extends React.Component {
 						New game
 					</Button>
 				</ul>
+				<LogBook logBook={logBook} />
 			</React.Fragment>
 		);
 	}

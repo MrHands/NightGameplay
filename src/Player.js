@@ -1,9 +1,10 @@
 import Names from './data/Names.json';
 
 class Player {
-	constructor(id, name) {
+	constructor(id, name, logEvent) {
 		this.id = id;
 		this.name = name;
+		this.logEvent = logEvent;
 		this.leading = false;
 		this.arousal = 0;
 		this.deck = [];
@@ -31,13 +32,15 @@ class Player {
 			// console.log(`key ${key} value ${value} id ${this.id} turn ${turn}`);
 
 			if (key === 'mine' && turn === this.id) {
-				console.log(`Add ${streak * value} to ${title}'s Arousal`);
-
+				let from = this.arousal;
 				this.arousal += streak * value;
+
+				this.logEvent(`Added ${streak * value} to ${title}'s Arousal (${from} => ${this.arousal})`);
 			} else if (key === 'theirs' && turn !== this.id) {
-				console.log(`Add ${streak * value} to ${title}'s Arousal`);
-
+				let from = this.arousal;
 				this.arousal += streak * value;
+
+				this.logEvent(`Added ${streak * value} to ${title}'s Arousal (${from} => ${this.arousal})`);
 			}
 		}
 	}
