@@ -22,8 +22,9 @@ class App extends React.Component {
 			crew: new Player('crew', 'Crew Member', this.logEvent),
 			tableCardCaptain: '',
 			tableCardCrew: '',
+			round: 1,
 			turn: 'captain',
-			streak: 1
+			streak: 1,
 		};
 
 		// event handlers
@@ -106,14 +107,19 @@ class App extends React.Component {
 		captain.fillHand();
 		crew.fillHand();
 
+		// round
+
+		this.logEvent('ROUND 1');
+
 		// play first card
 
 		let firstCard = crew.hand[Math.floor(Math.random() * crew.hand.length)];
 		crew.playCard(firstCard);
 
 		this.setState({
-			streak: 1,
+			round: 1,
 			turn: 'captain',
+			streak: 1,
 			captain: captain,
 			crew: crew,
 			tableCardCrew: firstCard
@@ -145,24 +151,24 @@ class App extends React.Component {
 	}
 
 	nextTurn() {
-		let { captain, crew, tableCardCaptain, tableCardCrew, turn, streak } = this.state;
+		let { captain, crew, tableCardCaptain, tableCardCrew, round, turn, streak } = this.state;
 
 		// apply captain card effects
 
 		let cardTableCaptain = CardsDatabase.cards.find((card) => card.id === tableCardCaptain);
 		let captainEffects = this.getActiveEffectBlock(cardTableCaptain);
-		this.logEvent(`Applying ${tableCardCaptain} to ${Names['captain']}`);
+		this.logEvent(`Card: Applying ${tableCardCaptain} to ${Names['captain']}`);
 		captain.applyEffects(captainEffects, turn, streak);
-		this.logEvent(`Applying ${tableCardCaptain} to ${Names['crew']}`);
+		this.logEvent(`Card: Applying ${tableCardCaptain} to ${Names['crew']}`);
 		crew.applyEffects(captainEffects, turn, streak);
 
 		// apply crew member card effects
 
 		let cardTableCrew = CardsDatabase.cards.find((card) => card.id === tableCardCrew);
 		let crewEffects = this.getActiveEffectBlock(cardTableCrew);
-		this.logEvent(`Applying ${tableCardCrew} to ${Names['captain']}`);
+		this.logEvent(`Card: Applying ${tableCardCrew} to ${Names['captain']}`);
 		captain.applyEffects(crewEffects, turn, streak);
-		this.logEvent(`Applying ${tableCardCrew} to ${Names['crew']}`);
+		this.logEvent(`Card: Applying ${tableCardCrew} to ${Names['crew']}`);
 		crew.applyEffects(crewEffects, turn, streak);
 
 		// apply card effects to streak
@@ -172,7 +178,7 @@ class App extends React.Component {
 				let from = streak;
 				streak += value;
 
-				this.logEvent(`Added ${value} to streak (${from} => ${streak})`);
+				this.logEvent(`Effect: Added ${value} to ${Names['streak']} (${from} => ${streak})`);
 			}
 		}
 
@@ -181,19 +187,19 @@ class App extends React.Component {
 				let from = streak;
 				streak += value;
 
-				this.logEvent(`Added ${value} to streak (${from} => ${streak})`);
+				this.logEvent(`Effect: Added ${value} to ${Names['streak']} (${from} => ${streak})`);
 			}
 		}
 
 		// change turns
 
 		if (turn === 'captain') {
-			this.logEvent(`Removed ${Names['crew']}'s ${tableCardCrew} from table`);
+			this.logEvent(`Table: Removed ${Names['crew']}'s ${tableCardCrew}`);
 
 			tableCardCrew = '';
 			turn = 'crew';
 		} else {
-			this.logEvent(`Removed ${Names['captain']}'s ${tableCardCaptain} from table`);
+			this.logEvent(`Table: Removed ${Names['captain']}'s ${tableCardCaptain}`);
 
 			tableCardCaptain = '';
 			turn = 'captain';
@@ -204,11 +210,17 @@ class App extends React.Component {
 		captain.fillHand();
 		crew.fillHand();
 
+		// next round
+
+		round += 1;
+		this.logEvent(`ROUND ${round}`);
+
 		this.setState({
 			captain: captain,
 			crew: crew,
 			tableCardCaptain: tableCardCaptain,
 			tableCardCrew: tableCardCrew,
+			round: round,
 			turn: turn,
 			streak: streak + 1,
 		});

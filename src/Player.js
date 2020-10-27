@@ -18,7 +18,7 @@ class Player {
 		let cardList = this.deck.slice(0, newCards);
 
 		cardList.forEach(card => {
-			this.logEvent(`${Names[this.id]} added ${card} to hand`);
+			this.logEvent(`Hand: Added ${card} to ${Names[this.id]}`);
 
 			this.hand.push(card);
 		});
@@ -27,7 +27,7 @@ class Player {
 	}
 
 	playCard(card) {
-		this.logEvent(`${Names[this.id]} played ${card}`);
+		this.logEvent(`Playing: ${Names[this.id]} played ${card}`);
 
 		this.hand = this.hand.filter(c => c !== card);
 	}
@@ -56,12 +56,12 @@ class Player {
 				let from = this.arousal;
 				this.arousal += streak * value;
 
-				this.logEvent(`Added ${streak * value} to ${title}'s Arousal (${from} => ${this.arousal})`);
+				this.logEvent(`Effect: Added ${streak * value} to ${title}'s Arousal (${from} => ${this.arousal})`);
 			} else if (key === 'theirs' && turn !== this.id) {
 				let from = this.arousal;
 				this.arousal += streak * value;
 
-				this.logEvent(`Added ${streak * value} to ${title}'s Arousal (${from} => ${this.arousal})`);
+				this.logEvent(`Effect: Added ${streak * value} to ${title}'s Arousal (${from} => ${this.arousal})`);
 			}
 		}
 	}
