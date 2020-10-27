@@ -191,6 +191,36 @@ class App extends React.Component {
 			}
 		}
 
+		// check streak
+
+		let streakFrom = streak;
+
+		if (turn === 'captain') {
+			if (cardTableCrew.connection === cardTableCaptain.type) {
+				this.logEvent(`Connect: ${Names['crew']}'s ${cardTableCrew.connection} connection matches ${Names['captain']}'s ${cardTableCaptain.type} card`);
+
+				streak += 1;
+				this.logEvent(`Streak: Continued (${streakFrom} => ${streak})`);
+			} else {
+				this.logEvent(`Connect: ${Names['crew']}'s ${cardTableCrew.connection} connection does not match ${Names['captain']}'s ${cardTableCaptain.type} card`);
+
+				streak = 1;
+				this.logEvent(`Streak: Broken (${streakFrom} => ${streak})`);
+			}
+		} else {
+			if (cardTableCaptain.connection === cardTableCrew.type) {
+				this.logEvent(`Connect: ${Names['captain']}'s ${cardTableCaptain.connection} connection matches ${Names['crew']}'s ${cardTableCrew.type} card`);
+
+				streak += 1;
+				this.logEvent(`Streak: Continued (${streakFrom} => ${streak})`);
+			} else {
+				this.logEvent(`Connect: ${Names['captain']}'s ${cardTableCaptain.connection} connection does not match ${Names['crew']}'s ${cardTableCrew.type} card`);
+
+				streak = 1;
+				this.logEvent(`Streak: Broken (${streakFrom} => ${streak})`);
+			}
+		}
+
 		// change turns
 
 		if (turn === 'captain') {
@@ -222,7 +252,7 @@ class App extends React.Component {
 			tableCardCrew: tableCardCrew,
 			round: round,
 			turn: turn,
-			streak: streak + 1,
+			streak: streak,
 		});
 	}
 
