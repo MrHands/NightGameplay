@@ -9,7 +9,7 @@ import './Card.css';
 
 class Card extends React.Component {
 	render() {
-		const { id, turn, streak, onPlay, onResolve } = this.props;
+		const { id, turn, streak, isDiscarded, onPlay, onResolve } = this.props;
 
 		let card = CardsDatabase.cards.find((card) => card.id === id);
 		if (!card) {
@@ -19,10 +19,10 @@ class Card extends React.Component {
 			);
 		}
 
-		let active = onResolve(card);
+		let active = onResolve ? onResolve(card) : null;
 
 		return (
-			<li className="m-card" card-id={card.id} onClickCapture={onPlay}>
+			<li className={`m-card ${isDiscarded ? ' -discarded' : ''}`} card-id={card.id} onClickCapture={onPlay}>
 				<h1 className="m-card__title">{card.title}</h1>
 				<h2 className="m-card__type">Type is {Names[card.type]}</h2>
 				<div className="m-card__effects">

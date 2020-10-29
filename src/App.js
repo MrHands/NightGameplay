@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Button from './components/Button';
+import Card from './components/Card';
 import CardHand from './components/CardHand';
 import HowToPlay from './components/HowToPlay';
 import Hud from './components/Hud';
@@ -23,6 +24,7 @@ class App extends React.Component {
 			crew: new Player('crew', 'Crew Member', this.logEvent),
 			tableCardLeft: '',
 			tableCardRight: '',
+			discardPile: [],
 			round: 0,
 			turn: 'captain',
 			streak: 1,
@@ -147,12 +149,10 @@ class App extends React.Component {
 				tableCardRight: id
 			});
 		}
-
-		console.log(`turn ${turn} id ${id}`);
 	}
 
 	nextTurn() {
-		let { captain, crew, tableCardLeft, tableCardRight, round, turn, streak } = this.state;
+		let { captain, crew, tableCardLeft, tableCardRight, discardPile, round, turn, streak } = this.state;
 
 		// apply previous card effects
 
@@ -208,9 +208,13 @@ class App extends React.Component {
 			this.logEvent(`Streak: Broken (${streakFrom} => ${streak})`);
 		}
 
-		// change leading player
+		// add to discard pile
 
-		this.logEvent(`Table: Removed ${tableCardLeft}`);
+		discardPile.push(tableCardLeft);
+
+		this.logEvent(`Table: Added ${tableCardLeft} to the discard pile`);
+
+		// change leading player
 
 		if (turn === 'captain') {
 			turn = 'crew';
@@ -233,6 +237,7 @@ class App extends React.Component {
 			crew: crew,
 			tableCardLeft: tableCardRight,
 			tableCardRight: '',
+			discardPile: discardPile,
 			round: round,
 			turn: turn,
 			streak: streak,
@@ -240,7 +245,7 @@ class App extends React.Component {
 	}
 
 	render() {
-		const { logBook, captain, crew, tableCardLeft, tableCardRight, round, turn, streak } = this.state;
+		const { logBook, captain, crew, tableCardLeft, tableCardRight, discardPile, round, turn, streak } = this.state;
 
 		if (round === 0) {
 			return (
@@ -248,7 +253,7 @@ class App extends React.Component {
 					<div className="o-explain">
 						<HowToPlay />
 					</div>
-					<ul className="m-gameplay">
+					<ul className="m-buttonBar">
 						<Button onClick={this.handleStartNewGame}>
 							Start game
 						</Button>
@@ -262,11 +267,23 @@ class App extends React.Component {
 		return (
 			<React.Fragment>
 				<Hud captain={captain} crew={crew} streak={streak} />
-				<h1>On the table</h1>
-				<Table cardPrevious={tableCardLeft} cardNext={tableCardRight} turn={turn} streak={streak} onResolve={this.handleGetActiveEffectBlock} />
+				<section className="o-gameplay">
+					<div>
+						<h1>Discard pile</h1>
+						<ul className="m-discardPile">
+							{discardPile.reverse().map(card => {
+								return (<Card id={card} isDiscarded={true} />);
+							})}
+						</ul>
+					</div>
+					<div>
+						<h1>On the table</h1>
+						<Table cardPrevious={tableCardLeft} cardNext={tableCardRight} turn={turn} streak={streak} onResolve={this.handleGetActiveEffectBlock} />
+					</div>
+				</section>
 				<h1>{`${Names[turn]}'s hand`}</h1>
 				<CardHand player={player} turn={turn} streak={streak} onPlay={this.handlePlayCard} onResolve={this.handleGetActiveEffectBlock} />
-				<ul className="m-gameplay">
+				<ul className="m-buttonBar">
 					<Button onClick={this.handleNextTurn}>
 						End turn
 					</Button>

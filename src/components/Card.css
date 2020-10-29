@@ -40,10 +40,39 @@
 	font-size: 16px;
 }
 
+.m-card * {
+	pointer-events: none;
+}
+
+/* empty card */
+
 .m-card.-none {
 	border-style: dashed;
 }
 
-.m-card * {
-	pointer-events: none;
+/* discarded card */
+
+.m-card.-discarded {
+	display: flex;
+	min-width: auto;
+	min-height: auto;
+	color: gray;
+	border-color: gray;
+	margin-bottom: 12px;
+}
+
+.m-card.-discarded > .m-card__title {
+	font-size: 16px;
+}
+
+.m-card.-discarded > .m-card__type {
+	display: none;
+}
+
+.m-card.-discarded > .m-card__effects {
+	display: none;
+}
+
+.m-card.-discarded > .m-card__connection {
+	display: none;
 }
