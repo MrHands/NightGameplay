@@ -1,4 +1,3 @@
-import CardsDatabase from './data/CardsDatabase.json';
 import Names from './data/Names.json';
 
 class Player {
@@ -32,21 +31,22 @@ class Player {
 		this.energy = 5;
 	}
 
-	playCard(cardId) {
-		this.logEvent(`Playing: ${Names[this.id]} played ${cardId}`);
+	playCard(card) {
+		this.logEvent(`Playing: ${Names[this.id]} played ${card.id}`);
 
-		let card = CardsDatabase.cards.find((c) => c.id === cardId);
 		if (this.energy < card.energy) {
 			this.logEvent(`Not enough energy left to play card.`);
 
-			return;
+			return false;
 		}
 
 		this.energy -= card.energy;
 
 		// remove from hand
 
-		this.hand = this.hand.filter(c => c !== cardId);
+		this.hand = this.hand.filter(c => c !== card.id);
+
+		return true;
 	}
 	
 	applyEffects(effects, turn, streak) {
@@ -71,7 +71,7 @@ class Player {
 
 			if (key === this.id || (key === 'mine' && turn === this.id) || (key === 'theirs' && turn !== this.id)) {
 				let from = this.arousal;
-				this.arousal += value + streak;
+				this.arousal += (value + streak) * Math.sign(value);
 				this.arousal = Math.max(0, this.arousal);
 
 				this.logEvent(`Effect: Added ${streak * value} to ${title}'s Arousal (${from} => ${this.arousal})`);
