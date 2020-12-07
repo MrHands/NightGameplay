@@ -50,7 +50,7 @@ class Player {
 	}
 	
 	applyEffects(effects, turn, streak) {
-		for (const [key, value] of Object.entries(effects.stats)) {
+		for (const [key, effect] of Object.entries(effects.stats)) {
 			let title = Names[key];
 
 			if (turn === 'captain') {
@@ -71,10 +71,10 @@ class Player {
 
 			if (key === this.id || (key === 'mine' && turn === this.id) || (key === 'theirs' && turn !== this.id)) {
 				let from = this.arousal;
-				this.arousal += (value + streak) * Math.sign(value);
-				this.arousal = Math.max(0, this.arousal);
+				let delta = Math.sign(effect) * (Math.abs(effect) + streak);
+				this.arousal = Math.max(0, this.arousal + delta);
 
-				this.logEvent(`Effect: Added ${streak * value} to ${title}'s Arousal (${from} => ${this.arousal})`);
+				this.logEvent(`Effect: Added ${delta} to ${title}'s Arousal (${from} => ${this.arousal})`);
 			}
 		}
 	}

@@ -28,7 +28,7 @@ class App extends React.Component {
 			discardPile: [],
 			round: 0,
 			turn: 'captain',
-			streak: 1,
+			streak: 0,
 		};
 
 		// event handlers
@@ -121,7 +121,7 @@ class App extends React.Component {
 		this.setState({
 			round: 1,
 			turn: 'captain',
-			streak: 1,
+			streak: 0,
 			captain: captain,
 			crew: crew,
 			tableCardLeft: firstCard

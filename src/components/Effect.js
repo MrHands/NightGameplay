@@ -26,8 +26,8 @@ class Effect extends React.Component {
 
 		let effectText;
 		
-		if (['mine', 'theirs'].indexOf(id) > -1) {
-			effectText = (effect * streak).toString();
+		if (['mine', 'theirs', 'captain', 'crew'].indexOf(id) > -1) {
+			effectText = ((Math.abs(effect) + streak) * Math.sign(effect)).toString();
 		} else {
 			effectText = effect.toString();
 		}
