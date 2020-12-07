@@ -9,9 +9,8 @@
 }
 
 .m-effectBlock.-active {
-	background: white;
+	background: lightblue;
 	color: black;
-	border-color: gold;
 }
 
 .m-effectBlock__condition {

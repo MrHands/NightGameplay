@@ -3,3 +3,7 @@
 	grid-template-columns: 2fr 1fr;
 	font-size: 14px;
 }
+
+.a-effect__value {
+	text-align: center;
+}

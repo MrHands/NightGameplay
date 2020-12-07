@@ -21,8 +21,8 @@ class App extends React.Component {
 
 		this.state = {
 			logBook: [],
-			captain: new Player('captain', 'Captain', this.logEvent),
-			crew: new Player('crew', 'Crew Member', this.logEvent),
+			captain: new Player('captain', Names['captain'], this.logEvent),
+			crew: new Player('crew', Names['crew'], this.logEvent),
 			tableCardLeft: '',
 			tableCardRight: '',
 			discardPile: [],

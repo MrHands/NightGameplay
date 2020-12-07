@@ -39,7 +39,7 @@ class Effect extends React.Component {
 		return (
 			<li className="a-effect">
 				<div>{title}</div>
-				<div>{effectText}</div>
+				<div className="a-effect__value">{effectText}</div>
 			</li>
 		);
 	}
