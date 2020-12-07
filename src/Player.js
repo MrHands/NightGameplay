@@ -1,3 +1,4 @@
+import CardsDatabase from './data/CardsDatabase.json';
 import Names from './data/Names.json';
 
 class Player {
@@ -7,12 +8,13 @@ class Player {
 		this.logEvent = logEvent;
 		this.leading = false;
 		this.arousal = 0;
+		this.energy = 5;
 		this.deck = [];
 		this.hand = [];
 	}
 
-	fillHand() {
-		console.log(this.id);
+	endTurn() {
+		// fill hand from deck
 
 		let newCards = Math.max(Math.min(5, this.deck.length), this.hand.length) - this.hand.length;
 		let cardList = this.deck.slice(0, newCards);
@@ -24,12 +26,27 @@ class Player {
 		});
 
 		this.deck = this.deck.filter(card => cardList.indexOf(card) === -1);
+
+		// reset energy
+
+		this.energy = 5;
 	}
 
-	playCard(card) {
-		this.logEvent(`Playing: ${Names[this.id]} played ${card}`);
+	playCard(cardId) {
+		this.logEvent(`Playing: ${Names[this.id]} played ${cardId}`);
 
-		this.hand = this.hand.filter(c => c !== card);
+		let card = CardsDatabase.cards.find((c) => c.id === cardId);
+		if (this.energy < card.energy) {
+			this.logEvent(`Not enough energy left to play card.`);
+
+			return;
+		}
+
+		this.energy -= card.energy;
+
+		// remove from hand
+
+		this.hand = this.hand.filter(c => c !== cardId);
 	}
 	
 	applyEffects(effects, turn, streak) {

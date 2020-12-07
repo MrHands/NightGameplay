@@ -101,15 +101,13 @@ class App extends React.Component {
 
 		this.logEvent(`New game started`);
 
-		// set up decks
+		// set up players
 
 		captain.deck = this.shuffleCards(DeckDatabase.decks.find((deck) => deck.id === 'captain').cards);
+		captain.endTurn();
+
 		crew.deck = this.shuffleCards(DeckDatabase.decks.find((deck) => deck.id === 'crew').cards);
-
-		// set up hands
-
-		captain.fillHand();
-		crew.fillHand();
+		crew.endTurn();
 
 		// round
 
@@ -223,10 +221,10 @@ class App extends React.Component {
 			turn = 'captain';
 		}
 
-		// fill hands
+		// end player turn
 
-		captain.fillHand();
-		crew.fillHand();
+		captain.endTurn();
+		crew.endTurn();
 
 		// next round
 
@@ -282,7 +280,8 @@ class App extends React.Component {
 						<Table cardPrevious={tableCardLeft} cardNext={tableCardRight} turn={turn} streak={streak} onResolve={this.handleGetActiveEffectBlock} />
 					</div>
 				</section>
-				<h1>{`${Names[turn]}'s hand`}</h1>
+				<h2>{`Energy Remaining: ${player.energy}`}</h2>
+				<h1>{`${Names[turn]} is playing`}</h1>
 				<CardHand player={player} turn={turn} streak={streak} onPlay={this.handlePlayCard} onResolve={this.handleGetActiveEffectBlock} />
 				<ul className="m-buttonBar">
 					<Button onClick={this.handleNextTurn}>
