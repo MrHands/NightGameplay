@@ -270,8 +270,8 @@ class App extends React.Component {
 					<div>
 						<h1>Discard pile</h1>
 						<ul className="m-discardPile">
-							{discardPile.reverse().map(card => {
-								return (<Card id={card} isDiscarded={true} />);
+							{discardPile.reverse().map((card, index) => {
+								return (<Card id={card} key={`discarded-${index}`} isDiscarded={true} />);
 							})}
 						</ul>
 					</div>

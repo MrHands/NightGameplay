@@ -87,3 +87,12 @@
 .m-card.-discarded > .m-card__connection {
 	display: none;
 }
+
+/* disabled */
+
+.m-card[disabled],
+.m-card[disabled] * {
+	color: gray !important;
+	background: lightgray !important;
+	border-color: gray !important;
+}

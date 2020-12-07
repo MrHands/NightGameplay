@@ -9,7 +9,7 @@ import './Card.css';
 
 class Card extends React.Component {
 	render() {
-		const { id, turn, streak, isDiscarded, onPlay, onResolve } = this.props;
+		const { id, player, turn, streak, isDiscarded, onPlay, onResolve } = this.props;
 
 		let card = CardsDatabase.cards.find((card) => card.id === id);
 		if (!card) {
@@ -20,13 +20,14 @@ class Card extends React.Component {
 		}
 
 		let active = onResolve ? onResolve(card) : null;
+		let isTooExpensive = player ? (player.energy < card.energy) : false;
 
 		return (
-			<li className={`m-card ${isDiscarded ? ' -discarded' : ''}`} card-id={card.id} onClickCapture={onPlay}>
+			<li className={`m-card ${isDiscarded ? ' -discarded' : ''}`} disabled={isTooExpensive} card-id={card.id} onClickCapture={onPlay}>
 				<h1 className="m-card__title">{card.title}</h1>
 				<h2 className="m-card__type">Type is {Names[card.type]}</h2>
 				<h2 className="m-card__energy">Energy Cost {card.energy}</h2>
-				<div className="m-card__effects">
+				<div className="m-card__effects" disabled={isTooExpensive}>
 					{card.effects.map((effect, index) => {
 						let isActive = effect === active;
 						return (
