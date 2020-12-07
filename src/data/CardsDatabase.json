@@ -1,302 +1,345 @@
 {
 	"cards": [
 		{
-			"id": "passionate-1",
-			"title": "Passionate 1",
+			"id": "captain-1",
+			"title": "Captain 1",
 			"type": "passionate",
 			"connection": "intimate",
+			"energy": 1,
 			"effects": [
 				{
 					"stats": {
-						"mine": 1,
-						"theirs": 2
+						"captain": 1
 					}
-				},
+				}
+			]
+		},
+		{
+			"id": "captain-2",
+			"title": "Captain 2",
+			"type": "passionate",
+			"connection": "intimate",
+			"energy": 2,
+			"effects": [
 				{
-					"condition": {
-						"stat": "streak",
-						"check": "greater-than-equal",
-						"value": 3
-					},
 					"stats": {
-						"mine": 2,
-						"theirs": 3,
+						"captain": 2
+					}
+				}
+			]
+		},
+		{
+			"id": "captain-3",
+			"title": "Captain 3",
+			"type": "passionate",
+			"connection": "intimate",
+			"energy": 3,
+			"effects": [
+				{
+					"stats": {
+						"captain": 3
+					}
+				}
+			]
+		},
+		{
+			"id": "captain-4",
+			"title": "Captain 4",
+			"type": "passionate",
+			"connection": "intimate",
+			"energy": 4,
+			"effects": [
+				{
+					"stats": {
+						"captain": 4
+					}
+				}
+			]
+		},
+		{
+			"id": "captain-5",
+			"title": "Captain 5",
+			"type": "intimate",
+			"connection": "dominant",
+			"energy": 1,
+			"effects": [
+				{
+					"stats": {
 						"streak": 1
 					}
 				}
 			]
 		},
 		{
-			"id": "passionate-2",
-			"title": "Passionate 2",
-			"type": "passionate",
-			"connection": "intimate",
+			"id": "captain-6",
+			"title": "Captain 6",
+			"type": "intimate",
+			"connection": "dominant",
+			"energy": 2,
 			"effects": [
 				{
 					"stats": {
-						"mine": 1,
-						"theirs": 1
-					}
-				},
-				{
-					"condition": {
-						"stat": "streak",
-						"check": "greater-than-equal",
-						"value": 6
-					},
-					"stats": {
-						"mine": 3,
-						"theirs": 3,
-						"streak": 1
-					}
-				}
-			]
-		},
-		{
-			"id": "passionate-3",
-			"title": "Passionate 3",
-			"type": "passionate",
-			"connection": "intimate",
-			"effects": [
-				{
-					"stats": {
-						"mine": 1,
-						"theirs": 3
-					}
-				},
-				{
-					"condition": {
-						"stat": "streak",
-						"check": "greater-than-equal",
-						"value": 6
-					},
-					"stats": {
-						"mine": 2,
-						"theirs": 3,
 						"streak": 2
 					}
 				}
 			]
 		},
 		{
-			"id": "passionate-4",
-			"title": "Passionate 4",
+			"id": "captain-7",
+			"title": "Captain 7",
+			"type": "intimate",
+			"connection": "dominant",
+			"energy": 3,
+			"effects": [
+				{
+					"stats": {
+						"streak": 3
+					}
+				}
+			]
+		},
+		{
+			"id": "captain-8",
+			"title": "Captain 8",
+			"type": "intimate",
+			"connection": "dominant",
+			"energy": 4,
+			"effects": [
+				{
+					"stats": {
+						"streak": 4
+					}
+				}
+			]
+		},
+		{
+			"id": "captain-9",
+			"title": "Captain 9",
+			"type": "dominant",
+			"connection": "passionate",
+			"energy": 1,
+			"effects": [
+				{
+					"stats": {
+						"captain": 1,
+						"crew": -1
+					}
+				}
+			]
+		},
+		{
+			"id": "captain-10",
+			"title": "Captain 10",
+			"type": "dominant",
+			"connection": "passionate",
+			"energy": 2,
+			"effects": [
+				{
+					"stats": {
+						"captain": 2,
+						"crew": -2
+					}
+				}
+			]
+		},
+		{
+			"id": "captain-11",
+			"title": "Captain 11",
+			"type": "dominant",
+			"connection": "passionate",
+			"energy": 3,
+			"effects": [
+				{
+					"stats": {
+						"captain": 3,
+						"crew": -3
+					}
+				}
+			]
+		},
+		{
+			"id": "captain-12",
+			"title": "Captain 12",
+			"type": "dominant",
+			"connection": "passionate",
+			"energy": 4,
+			"effects": [
+				{
+					"stats": {
+						"captain": 4,
+						"crew": -4
+					}
+				}
+			]
+		},
+		{
+			"id": "crew-1",
+			"title": "Crew Member 1",
 			"type": "passionate",
 			"connection": "intimate",
+			"energy": 1,
 			"effects": [
 				{
 					"stats": {
-						"mine": 2,
-						"theirs": 2
-					}
-				},
-				{
-					"condition": {
-						"stat": "streak",
-						"check": "greater-than-equal",
-						"value": 9
-					},
-					"stats": {
-						"mine": 4,
-						"theirs": 4,
-						"play-again": true
+						"crew": 2
 					}
 				}
 			]
 		},
 		{
-			"id": "dominant-1",
-			"title": "Dominant 1",
-			"type": "dominant",
-			"connection": "passionate",
+			"id": "crew-2",
+			"title": "Crew Member 2",
+			"type": "passionate",
+			"connection": "intimate",
+			"energy": 2,
 			"effects": [
 				{
 					"stats": {
-						"mine": 1
-					}
-				},
-				{
-					"condition": {
-						"stat": "streak",
-						"check": "greater-than-equal",
-						"value": 5
-					},
-					"stats": {
-						"mine": 1,
-						"theirs": 2,
-						"streak": -1
+						"crew": 2
 					}
 				}
 			]
 		},
 		{
-			"id": "dominant-2",
-			"title": "Dominant 2",
-			"type": "dominant",
-			"connection": "passionate",
+			"id": "crew-3",
+			"title": "Crew Member 3",
+			"type": "passionate",
+			"connection": "intimate",
+			"energy": 3,
 			"effects": [
 				{
 					"stats": {
-						"mine": 2
-					}
-				},
-				{
-					"condition": {
-						"stat": "streak",
-						"check": "greater-than-equal",
-						"value": 5
-					},
-					"stats": {
-						"mine": 1,
-						"theirs": 3,
-						"streak": -1
+						"crew": 3
 					}
 				}
 			]
 		},
 		{
-			"id": "dominant-3",
-			"title": "Dominant 3",
-			"type": "dominant",
-			"connection": "passionate",
+			"id": "crew-4",
+			"title": "Crew Member 4",
+			"type": "passionate",
+			"connection": "intimate",
+			"energy": 4,
 			"effects": [
 				{
 					"stats": {
-						"mine": 3
-					}
-				},
-				{
-					"condition": {
-						"stat": "streak",
-						"check": "greater-than-equal",
-						"value": 8
-					},
-					"stats": {
-						"mine": 1,
-						"theirs": 2,
-						"streak": -2
+						"crew": 4
 					}
 				}
 			]
 		},
 		{
-			"id": "dominant-4",
-			"title": "Dominant 4",
-			"type": "dominant",
-			"connection": "passionate",
-			"effects": [
-				{
-					"stats": {
-						"mine": 4
-					}
-				},
-				{
-					"condition": {
-						"stat": "streak",
-						"check": "greater-than-equal",
-						"value": 8
-					},
-					"stats": {
-						"mine": 1,
-						"theirs": 4,
-						"streak": -2
-					}
-				}
-			]
-		},
-		{
-			"id": "intimate-1",
-			"title": "Intimate 1",
+			"id": "crew-5",
+			"title": "Crew Member 5",
 			"type": "intimate",
 			"connection": "dominant",
+			"energy": 1,
 			"effects": [
 				{
 					"stats": {
-						"theirs": 2
-					}
-				},
-				{
-					"condition": {
-						"stat": "streak",
-						"check": "less-than-equal",
-						"value": 2
-					},
-					"stats": {
-						"theirs": 4,
-						"streak": 3,
-						"play-again": true
-					}
-				}
-			]
-		},
-		{
-			"id": "intimate-2",
-			"title": "Intimate 2",
-			"type": "intimate",
-			"connection": "dominant",
-			"effects": [
-				{
-					"stats": {
-						"theirs": 3
-					}
-				},
-				{
-					"condition": {
-						"stat": "streak",
-						"check": "less-than-equal",
-						"value": 4
-					},
-					"stats": {
-						"theirs": 3,
-						"streak": 2
-					}
-				}
-			]
-		},
-		{
-			"id": "intimate-3",
-			"title": "Intimate 3",
-			"type": "intimate",
-			"connection": "dominant",
-			"effects": [
-				{
-					"stats": {
-						"theirs": 1
-					}
-				},
-				{
-					"condition": {
-						"stat": "streak",
-						"check": "less-than-equal",
-						"value": 6
-					},
-					"stats": {
-						"theirs": 2,
 						"streak": 1
 					}
 				}
 			]
 		},
 		{
-			"id": "intimate-4",
-			"title": "Intimate 4",
+			"id": "crew-6",
+			"title": "Crew Member 6",
 			"type": "intimate",
 			"connection": "dominant",
+			"energy": 2,
 			"effects": [
 				{
 					"stats": {
-						"theirs": 1
+						"streak": 2
 					}
-				},
+				}
+			]
+		},
+		{
+			"id": "crew-7",
+			"title": "Crew Member 7",
+			"type": "intimate",
+			"connection": "dominant",
+			"energy": 3,
+			"effects": [
 				{
-					"condition": {
-						"stat": "streak",
-						"check": "less-than-equal",
-						"value": 8
-					},
 					"stats": {
-						"mine": 1,
-						"theirs": 2
+						"streak": 3
+					}
+				}
+			]
+		},
+		{
+			"id": "crew-8",
+			"title": "Crew Member 8",
+			"type": "intimate",
+			"connection": "dominant",
+			"energy": 4,
+			"effects": [
+				{
+					"stats": {
+						"streak": 4
+					}
+				}
+			]
+		},
+		{
+			"id": "crew-9",
+			"title": "Crew Member 9",
+			"type": "dominant",
+			"connection": "passionate",
+			"energy": 1,
+			"effects": [
+				{
+					"stats": {
+						"crew": 1,
+						"captain": -1
+					}
+				}
+			]
+		},
+		{
+			"id": "crew-10",
+			"title": "Crew Member 10",
+			"type": "dominant",
+			"connection": "passionate",
+			"energy": 2,
+			"effects": [
+				{
+					"stats": {
+						"crew": 2,
+						"captain": -2
+					}
+				}
+			]
+		},
+		{
+			"id": "crew-11",
+			"title": "Crew Member 11",
+			"type": "dominant",
+			"connection": "passionate",
+			"energy": 3,
+			"effects": [
+				{
+					"stats": {
+						"crew": 3,
+						"captain": -3
+					}
+				}
+			]
+		},
+		{
+			"id": "crew-12",
+			"title": "Crew Member 12",
+			"type": "dominant",
+			"connection": "passionate",
+			"energy": 4,
+			"effects": [
+				{
+					"stats": {
+						"crew": 4,
+						"captain": -4
 					}
 				}
 			]
