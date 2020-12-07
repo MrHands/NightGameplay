@@ -27,7 +27,7 @@ class Card extends React.Component {
 				<h1 className="m-card__title">{card.title}</h1>
 				<h2 className="m-card__type">Type is {Names[card.type]}</h2>
 				<h2 className="m-card__energy">Energy Cost {card.energy}</h2>
-				<div className="m-card__effects" disabled={isTooExpensive}>
+				<div className="m-card__effects">
 					{card.effects.map((effect, index) => {
 						let isActive = effect === active;
 						return (
