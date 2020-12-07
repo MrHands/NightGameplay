@@ -1,0 +1,38 @@
+{
+	"decks": [
+		{
+			"id": "captain",
+			"cards": [
+				"captain-1",
+				"captain-2",
+				"captain-3",
+				"captain-4",
+				"captain-5",
+				"captain-6",
+				"captain-7",
+				"captain-8",
+				"captain-9",
+				"captain-10",
+				"captain-11",
+				"captain-12"
+			]
+		},
+		{
+			"id": "crew",
+			"cards": [
+				"crew-1",
+				"crew-2",
+				"crew-3",
+				"crew-4",
+				"crew-5",
+				"crew-6",
+				"crew-7",
+				"crew-8",
+				"crew-9",
+				"crew-10",
+				"crew-11",
+				"crew-12"
+			]
+		}
+	]
+}

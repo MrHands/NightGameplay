@@ -10,6 +10,7 @@ import Table from './components/Table';
 import Player from './Player';
 
 import CardsDatabase from './data/CardsDatabase.json';
+import DeckDatabase from './data/DeckDatabase.json';
 import Names from './data/Names.json';
 
 import './App.css';
@@ -102,8 +103,8 @@ class App extends React.Component {
 
 		// set up decks
 
-		captain.deck = this.shuffleCards(CardsDatabase.cards.map((card) => card.id));
-		crew.deck = this.shuffleCards(CardsDatabase.cards.map((card) => card.id));
+		captain.deck = this.shuffleCards(DeckDatabase.decks.find((deck) => deck.id === 'captain').cards);
+		crew.deck = this.shuffleCards(DeckDatabase.decks.find((deck) => deck.id === 'crew').cards);
 
 		// set up hands
 
