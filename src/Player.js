@@ -52,14 +52,10 @@ class Player {
 
 			// console.log(`key ${key} value ${value} id ${this.id} turn ${turn}`);
 
-			if (key === 'mine' && turn === this.id) {
+			if (key === this.id || (key === 'mine' && turn === this.id) || (key === 'theirs' && turn !== this.id)) {
 				let from = this.arousal;
-				this.arousal += streak * value;
-
-				this.logEvent(`Effect: Added ${streak * value} to ${title}'s Arousal (${from} => ${this.arousal})`);
-			} else if (key === 'theirs' && turn !== this.id) {
-				let from = this.arousal;
-				this.arousal += streak * value;
+				this.arousal += value + streak;
+				this.arousal = Math.max(0, this.arousal);
 
 				this.logEvent(`Effect: Added ${streak * value} to ${title}'s Arousal (${from} => ${this.arousal})`);
 			}
