@@ -114,18 +114,14 @@ class App extends React.Component {
 
 		this.logEvent('ROUND 1');
 
-		// play first card
-
-		let firstCard = crew.hand[Math.floor(Math.random() * crew.hand.length)];
-		crew.playCard(firstCard);
+		// crew member starts
 
 		this.setState({
 			round: 1,
-			turn: 'captain',
+			turn: 'crew',
 			streak: 0,
 			captain: captain,
-			crew: crew,
-			tableCardLeft: firstCard
+			crew: crew
 		});
 	}
 
@@ -213,11 +209,13 @@ class App extends React.Component {
 
 		// add cards to discard pile
 
-		this.discard(tableCardLeft);
+		if (tableCardLeft !== '') {
+			this.discard(tableCardLeft);
+		}
 
 		tableCards.splice(0, tableCards.length - 1).forEach((card) => {
 			this.discard(card);
-		})
+		});
 
 		// change leading player
 
