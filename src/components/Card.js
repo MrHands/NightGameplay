@@ -11,6 +11,7 @@ class Card extends React.Component {
 	render() {
 		const {
 			id,
+			handId,
 			player,
 			turn,
 			streak,
@@ -41,7 +42,7 @@ class Card extends React.Component {
 		}
 
 		return (
-			<li className={`m-card ${isDiscarded ? ' -discarded' : ''}`} disabled={isTooExpensive} card-id={card.id} onClickCapture={onPlay}>
+			<li className={`m-card ${isDiscarded ? ' -discarded' : ''}`} disabled={isTooExpensive} card-id={card.id} card-hand-id={handId} onClickCapture={onPlay}>
 				<h1 className="m-card__title">{card.title}</h1>
 				<div className="m-card__type">
 					<span className={`a-type ${isLinkedTo ? ' -link' : ''}`}>{Names[card.type]}</span>

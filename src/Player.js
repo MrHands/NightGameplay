@@ -1,5 +1,7 @@
 import Names from './data/Names.json';
 
+import DeckDatabase from './data/DeckDatabase.json';
+
 class Player {
 	constructor(id, name, logEvent) {
 		this.id = id;
@@ -13,26 +15,52 @@ class Player {
 		this.hand = [];
 	}
 
+	shuffleCards(cards) {
+		let copy = [];
+
+		for (let n = cards.length; n > 0; n--) {
+			let i = Math.floor(Math.random() * n);
+			copy.push(cards.splice(i, 1)[0]);
+		}
+
+		return copy;
+	}
+
+	setupDeck(deckName) {
+		let deckCards = this.shuffleCards(DeckDatabase.decks.find((deck) => deck.id === deckName).cards);
+
+		this.deck = [];
+		deckCards.forEach((card, index) => {
+			this.deck.push({
+				id: card,
+				handId: index
+			});
+		});
+	}
+
 	endTurn() {
 		// fill hand from deck
 
-		let newCards = Math.max(Math.min(5, this.deck.length), this.hand.length) - this.hand.length;
-		let cardList = this.deck.slice(0, newCards);
+		this.hand = [];
+		let indices = [];
 
+		let cardList = this.deck.slice(0, 5);
 		cardList.forEach(card => {
-			this.logEvent(`Hand: Added ${card} to ${Names[this.id]}`);
+			this.logEvent(`Hand: Added ${card.id} to ${Names[this.id]}`);
 
 			this.hand.push(card);
+
+			indices.push(card.id);
 		});
 
-		this.deck = this.deck.filter(card => cardList.indexOf(card) === -1);
+		this.deck = this.deck.filter(card => indices.indexOf(card.id) === -1);
 
 		// reset energy
 
 		this.energy = 5;
 	}
 
-	playCard(card) {
+	playCard(card, handId) {
 		this.logEvent(`Playing: ${Names[this.id]} played ${card.id}`);
 
 		if (this.energy < card.energy) {
@@ -45,7 +73,7 @@ class Player {
 
 		// remove from hand
 
-		this.hand = this.hand.filter(c => c !== card.id);
+		this.hand = this.hand.filter(c => c.handId !== Number(handId));
 
 		return true;
 	}

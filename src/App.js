@@ -9,7 +9,6 @@ import Gameplay from './components/Gameplay';
 import Player from './Player';
 
 import CardsDatabase from './data/CardsDatabase.json';
-import DeckDatabase from './data/DeckDatabase.json';
 import Names from './data/Names.json';
 
 import './App.css';
@@ -85,17 +84,6 @@ class App extends React.Component {
 		return block;
 	}
 
-	shuffleCards(cards) {
-		let copy = [];
-
-		for (let n = cards.length; n > 0; n--) {
-			let i = Math.floor(Math.random() * n);
-			copy.push(cards.splice(i, 1)[0]);
-		}
-
-		return copy;
-	}
-
 	startNewGame() {
 		let { captain, crew } = this.state;
 
@@ -103,10 +91,10 @@ class App extends React.Component {
 
 		// set up players
 
-		captain.deck = this.shuffleCards(DeckDatabase.decks.find((deck) => deck.id === 'captain').cards);
+		captain.setupDeck('captain');
 		captain.endTurn();
 
-		crew.deck = this.shuffleCards(DeckDatabase.decks.find((deck) => deck.id === 'crew').cards);
+		crew.setupDeck('crew');
 		crew.endTurn();
 
 		// round
@@ -135,16 +123,17 @@ class App extends React.Component {
 		} = this.state;
 
 		let cardId = event.target.getAttribute('card-id');
+		let handId = event.target.getAttribute('card-hand-id');
 		let cardPlayed = CardsDatabase.cards.find((c) => c.id === cardId);
 
 		// check if card can be played
 
 		if (turn === 'captain') {
-			if (!captain.playCard(cardPlayed)) {
+			if (!captain.playCard(cardPlayed, handId)) {
 				return;
 			}
 		} else {
-			if (!crew.playCard(cardPlayed)) {
+			if (!crew.playCard(cardPlayed, handId)) {
 				return;
 			}
 		}
