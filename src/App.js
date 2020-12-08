@@ -105,7 +105,7 @@ class App extends React.Component {
 
 		this.setState({
 			round: 1,
-			turn: 'crew',
+			turn: 'captain',
 			streak: 0,
 			captain: captain,
 			crew: crew
