@@ -1,12 +1,11 @@
 import React from 'react';
 
 import Button from './components/Button';
-import Card from './components/Card';
 import CardHand from './components/CardHand';
 import HowToPlay from './components/HowToPlay';
 import Hud from './components/Hud';
 import LogBook from './components/LogBook';
-import Table from './components/Table';
+import Gameplay from './components/Gameplay';
 import Player from './Player';
 
 import CardsDatabase from './data/CardsDatabase.json';
@@ -288,21 +287,21 @@ class App extends React.Component {
 
 		return (
 			<React.Fragment>
-				<Hud captain={captain} crew={crew} streak={streak} />
-				<section className="o-gameplay">
-					<div>
-						<h1>Discard pile</h1>
-						<ul className="m-discardPile">
-							{discardPile.reverse().map((card, index) => {
-								return (<Card id={card} key={`discarded-${index}`} isDiscarded={true} />);
-							})}
-						</ul>
-					</div>
-					<div>
-						<h1>On the table</h1>
-						<Table cardPrevious={tableCardLeft} cardNext={tableCardRight} tableCards={tableCards} cardLink={cardLink} turn={turn} streak={streak} onResolve={this.handleGetActiveEffectBlock} />
-					</div>
-				</section>
+				<Hud
+					captain={captain}
+					crew={crew}
+					streak={streak}
+				/>
+				<Gameplay
+					discardPile={discardPile}
+					cardPrevious={tableCardLeft}
+					cardNext={tableCardRight}
+					tableCards={tableCards}
+					cardLink={cardLink}
+					turn={turn}
+					streak={streak}
+					onResolve={this.handleGetActiveEffectBlock}
+				/>
 				<h1>{`${Names[turn]}'s turn`}</h1>
 				<CardHand player={player} turn={turn} streak={streak} onPlay={this.handlePlayCard} cardLink={cardLink} onResolve={this.handleGetActiveEffectBlock} />
 				<h2>{`Energy Remaining: ${player.energy}`}</h2>
