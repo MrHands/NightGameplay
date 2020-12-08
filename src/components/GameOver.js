@@ -13,7 +13,9 @@ class GameOver extends React.Component {
 			winner,
 			captain,
 			crew,
-			streak
+			streak,
+			round,
+			onResolve,
 		} = this.props;
 
 		let captainCards = captain.played.map((card, index) => {
@@ -40,24 +42,32 @@ class GameOver extends React.Component {
 					crew={crew}
 					streak={streak}
 				/>
+				<div className="m-victory">
+					<h1 className="m-victory__title">{`${round - 1} rounds played`}</h1>
+				</div>
 				<section className="m-cardsPlayed">
 					<div>
-						<h2>{`Cards played by ${Names[captain.id]}`}</h2>
+						<h2>{`${Names[captain.id]} played ${captainCards.length} card(s):`}</h2>
 						<CardHand
 							cards={captainCards}
 							player={captain}
 							streak={1}
+							onResolve={onResolve}
 						/>
 					</div>
 					<div>
-						<h2>{`Cards played by ${Names[crew.id]}`}</h2>
+						<h2>{`${Names[crew.id]} played ${crewCards.length} card(s):`}</h2>
 						<CardHand
 							cards={crewCards}
 							player={crew}
 							streak={1}
+							onResolve={onResolve}
 						/>
 					</div>
 				</section>
+				<div className="m-victory">
+					<h1 className="m-victory__title">Thanks for playing!</h1>
+				</div>
 			</React.Fragment>
 		);
 	}

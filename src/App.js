@@ -341,6 +341,8 @@ class App extends React.Component {
 						captain={captain}
 						crew={crew}
 						streak={streak}
+						round={round}
+						onResolve={this.handleGetActiveEffectBlock}
 					/>
 					<ul className="m-buttonBar">
 						<Button onClick={this.handleStartNewGame}>
