@@ -9,7 +9,7 @@ class Arousal extends React.Component {
 		return (
 			<div className="m-arousal">
 				<h2>{player.name}</h2>
-				<Progress min="0" max="100" value={player.arousal} />
+				<Progress min="0" max={player.maxArousal} value={player.arousal} />
 			</div>
 		);
 	}

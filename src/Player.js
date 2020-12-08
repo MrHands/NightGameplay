@@ -7,6 +7,7 @@ class Player {
 		this.logEvent = logEvent;
 		this.leading = false;
 		this.arousal = 0;
+		this.maxArousal = 30;
 		this.energy = 5;
 		this.deck = [];
 		this.hand = [];
