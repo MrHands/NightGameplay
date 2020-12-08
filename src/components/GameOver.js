@@ -30,25 +30,31 @@ class GameOver extends React.Component {
 		});
 
 		return (
-			<section className="o-gameOver">
+			<React.Fragment>
 				<Hud
 					captain={captain}
 					crew={crew}
 					streak={streak}
 				/>
-				<h2>{`Cards played by ${Names[captain.id]}`}</h2>
-				<CardHand
-					cards={captainCards}
-					player={captain}
-					streak={1}
-				/>
-				<h2>{`Cards played by ${Names[crew.id]}`}</h2>
-				<CardHand
-					cards={crewCards}
-					player={crew}
-					streak={1}
-				/>
+				<section className="m-cardsPlayed">
+					<div>
+						<h2>{`Cards played by ${Names[captain.id]}`}</h2>
+						<CardHand
+							cards={captainCards}
+							player={captain}
+							streak={1}
+						/>
+					</div>
+					<div>
+						<h2>{`Cards played by ${Names[crew.id]}`}</h2>
+						<CardHand
+							cards={crewCards}
+							player={crew}
+							streak={1}
+						/>
+					</div>
 			</section>
+			</React.Fragment>
 		);
 	}
 }
