@@ -11,7 +11,7 @@ class StreakCounter extends React.Component {
 		return (
 			<div className="m-streakCounter">
 				<h2 className="m-streakCounter__name">{Names['streak']}</h2>
-				<h2 className="m-streakCounter__text">{streak}x</h2>
+				<h2 className="m-streakCounter__text">+{streak}</h2>
 			</div>
 		);
 	}
