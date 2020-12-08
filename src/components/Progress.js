@@ -3,10 +3,15 @@ import './Progress.css';
 
 class Progress extends React.Component {
 	render() {
-		let { min, max, value } = this.props;
+		let {
+			min,
+			max,
+			value
+		} = this.props;
 
+		let width = Math.min(100, ((value - min) / (max - min)) * 100);
 		let style = {
-			width: (((value - min) / (max - min)) * 100) + '%'
+			width: width + '%'
 		};
 
 		return (
