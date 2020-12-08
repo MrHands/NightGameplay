@@ -6,17 +6,22 @@ import './CardHand.css';
 
 class CardHand extends React.Component {
 	render() {
-		const { player, turn, streak, onPlay, onResolve } = this.props;
-
-		const items = player.hand.map((id, index) => {
-			return (
-				<Card key={`card-${index}`} id={id} player={player} turn={turn} streak={streak} onPlay={onPlay} onResolve={onResolve} />
-			);
-		});
+		const {
+			player,
+			turn,
+			streak,
+			cardLink,
+			onPlay,
+			onResolve
+		} = this.props;
 
 		return (
 			<ul className="m-cardHand">
-				{items}
+				{player.hand.map((id, index) => {
+					return (
+						<Card key={`card-${index}`} id={id} player={player} turn={turn} streak={streak} cardLink={cardLink} onPlay={onPlay} onResolve={onResolve} />
+					);
+				})}
 			</ul>
 		);
 	}

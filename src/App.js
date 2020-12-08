@@ -23,6 +23,7 @@ class App extends React.Component {
 			logBook: [],
 			captain: new Player('captain', Names['captain'], this.logEvent),
 			crew: new Player('crew', Names['crew'], this.logEvent),
+			cardLink: '',
 			tableCardLeft: '',
 			tableCardRight: '',
 			tableCards: [],
@@ -172,6 +173,7 @@ class App extends React.Component {
 			captain: captain,
 			tableCardRight: cardId,
 			tableCards: tableCards,
+			cardLink: '',
 			streak: streak
 		});
 	}
@@ -241,6 +243,7 @@ class App extends React.Component {
 			tableCardLeft: tableCardRight,
 			tableCardRight: '',
 			tableCards: [],
+			cardLink: tableCardRight,
 			round: round,
 			turn: turn,
 			streak: streak,
@@ -248,7 +251,21 @@ class App extends React.Component {
 	}
 
 	render() {
-		const { logBook, captain, crew, tableCardLeft, tableCardRight, tableCards, discardPile, round, turn, streak } = this.state;
+		const {
+			logBook,
+			captain,
+			crew,
+			tableCardLeft,
+			tableCardRight,
+			tableCards,
+			cardLink,
+			discardPile,
+			round,
+			turn,
+			streak
+		} = this.state;
+
+		console.log(cardLink);
 
 		if (round === 0) {
 			return (
@@ -281,11 +298,11 @@ class App extends React.Component {
 					</div>
 					<div>
 						<h1>On the table</h1>
-						<Table cardPrevious={tableCardLeft} cardNext={tableCardRight} tableCards={tableCards} turn={turn} streak={streak} onResolve={this.handleGetActiveEffectBlock} />
+						<Table cardPrevious={tableCardLeft} cardNext={tableCardRight} tableCards={tableCards} cardLink={cardLink} turn={turn} streak={streak} onResolve={this.handleGetActiveEffectBlock} />
 					</div>
 				</section>
 				<h1>{`${Names[turn]}'s turn`}</h1>
-				<CardHand player={player} turn={turn} streak={streak} onPlay={this.handlePlayCard} onResolve={this.handleGetActiveEffectBlock} />
+				<CardHand player={player} turn={turn} streak={streak} onPlay={this.handlePlayCard} cardLink={cardLink} onResolve={this.handleGetActiveEffectBlock} />
 				<h2>{`Energy Remaining: ${player.energy}`}</h2>
 				<ul className="m-buttonBar">
 					<Button onClick={this.handleNextTurn}>

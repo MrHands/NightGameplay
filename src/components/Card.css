@@ -5,6 +5,10 @@
 	border-radius: 8px;
 }
 
+.a-type.-link {
+	background: orange;
+}
+
 .m-card {
 	display: grid;
 	grid-template-rows: repeat(3, min-content) 1fr min-content;
