@@ -25,6 +25,7 @@ class App extends React.Component {
 			crew: new Player('crew', Names['crew'], this.logEvent),
 			tableCardLeft: '',
 			tableCardRight: '',
+			tableCards: [],
 			discardPile: [],
 			round: 0,
 			turn: 'captain',
@@ -129,7 +130,7 @@ class App extends React.Component {
 	}
 
 	playCard(event) {
-		let { captain, crew, streak, turn } = this.state;
+		let { captain, crew, streak, turn, tableCards } = this.state;
 
 		let cardId = event.target.getAttribute('card-id');
 		let card = CardsDatabase.cards.find((c) => c.id === cardId);
@@ -164,54 +165,35 @@ class App extends React.Component {
 			}
 		}
 
+		// add to table
+
+		tableCards.push(cardId);
+
+		// update state
+
 		this.setState({
 			crew: crew,
 			captain: captain,
 			tableCardRight: cardId,
+			tableCards: tableCards,
 			streak: streak
 		});
 	}
 
+	discard(cardId) {
+		let { discardPile } = this.state;
+
+		discardPile.push(cardId);
+
+		this.logEvent(`Table: Added ${cardId} to the discard pile`);
+
+		this.setState({
+			discardPile: discardPile
+		});
+	}
+
 	nextTurn() {
-		let { captain, crew, tableCardLeft, tableCardRight, discardPile, round, turn, streak } = this.state;
-
-		/*// apply previous card effects
-
-		let cardTableLeft = CardsDatabase.cards.find((card) => card.id === tableCardLeft);
-		let effectsLeft = this.getActiveEffectBlock(cardTableLeft);
-		this.logEvent(`Card: Applying ${tableCardLeft} to ${Names['captain']}`);
-		captain.applyEffects(effectsLeft, turn, streak);
-		this.logEvent(`Card: Applying ${tableCardLeft} to ${Names['crew']}`);
-		crew.applyEffects(effectsLeft, turn, streak);
-
-		// apply new card effects
-
-		let cardTableRight = CardsDatabase.cards.find((card) => card.id === tableCardRight);
-		let effectsRight = this.getActiveEffectBlock(cardTableRight);
-		this.logEvent(`Card: Applying ${tableCardRight} to ${Names['captain']}`);
-		captain.applyEffects(effectsRight, turn, streak);
-		this.logEvent(`Card: Applying ${tableCardRight} to ${Names['crew']}`);
-		crew.applyEffects(effectsRight, turn, streak);
-
-		// apply card effects to streak
-
-		for (const [key, value] of Object.entries(effectsLeft.stats)) {
-			if (key === 'streak') {
-				let from = streak;
-				streak += value;
-
-				this.logEvent(`Effect: Added ${value} to ${Names['streak']} (${from} => ${streak})`);
-			}
-		}
-
-		for (const [key, value] of Object.entries(effectsRight.stats)) {
-			if (key === 'streak') {
-				let from = streak;
-				streak += value;
-
-				this.logEvent(`Effect: Added ${value} to ${Names['streak']} (${from} => ${streak})`);
-			}
-		}*/
+		let { captain, crew, tableCardLeft, tableCards, tableCardRight, round, turn, streak } = this.state;
 
 		/*// check streak
 
@@ -229,11 +211,13 @@ class App extends React.Component {
 			this.logEvent(`Streak: Broken (${streakFrom} => ${streak})`);
 		}*/
 
-		// add to discard pile
+		// add cards to discard pile
 
-		discardPile.push(tableCardLeft);
+		this.discard(tableCardLeft);
 
-		this.logEvent(`Table: Added ${tableCardLeft} to the discard pile`);
+		tableCards.splice(0, tableCards.length - 1).forEach((card) => {
+			this.discard(card);
+		})
 
 		// change leading player
 
@@ -258,7 +242,7 @@ class App extends React.Component {
 			crew: crew,
 			tableCardLeft: tableCardRight,
 			tableCardRight: '',
-			discardPile: discardPile,
+			tableCards: [],
 			round: round,
 			turn: turn,
 			streak: streak,
@@ -266,7 +250,7 @@ class App extends React.Component {
 	}
 
 	render() {
-		const { logBook, captain, crew, tableCardLeft, tableCardRight, discardPile, round, turn, streak } = this.state;
+		const { logBook, captain, crew, tableCardLeft, tableCardRight, tableCards, discardPile, round, turn, streak } = this.state;
 
 		if (round === 0) {
 			return (
@@ -299,7 +283,7 @@ class App extends React.Component {
 					</div>
 					<div>
 						<h1>On the table</h1>
-						<Table cardPrevious={tableCardLeft} cardNext={tableCardRight} turn={turn} streak={streak} onResolve={this.handleGetActiveEffectBlock} />
+						<Table cardPrevious={tableCardLeft} cardNext={tableCardRight} tableCards={tableCards} turn={turn} streak={streak} onResolve={this.handleGetActiveEffectBlock} />
 					</div>
 				</section>
 				<h1>{`${Names[turn]}'s turn`}</h1>

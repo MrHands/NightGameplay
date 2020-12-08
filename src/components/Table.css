@@ -1,6 +1,5 @@
 .m-table {
-	display: grid;
-	grid-template-columns: repeat(2, min-content);
+	display: flex;
 	grid-column-gap: 12px;
 	list-style: none;
 	padding: 0;
