@@ -1,3 +1,10 @@
+.a-type {
+	font-size: 16px;
+	background: lightgray;
+	padding: 4px 8px;
+	border-radius: 8px;
+}
+
 .m-card {
 	display: grid;
 	grid-template-rows: repeat(3, min-content) 1fr min-content;
@@ -24,7 +31,6 @@
 .m-card__type {
 	grid-area: type;
 	margin: 0;
-	font-size: 16px;
 	text-align: right;
 }
 

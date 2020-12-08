@@ -25,7 +25,9 @@ class Card extends React.Component {
 		return (
 			<li className={`m-card ${isDiscarded ? ' -discarded' : ''}`} disabled={isTooExpensive} card-id={card.id} onClickCapture={onPlay}>
 				<h1 className="m-card__title">{card.title}</h1>
-				<h2 className="m-card__type">Type is {Names[card.type]}</h2>
+				<div className="m-card__type">
+					<span className="a-type">{Names[card.type]}</span>
+				</div>
 				<h2 className="m-card__energy">Energy Cost {card.energy}</h2>
 				<div className="m-card__effects">
 					{card.effects.map((effect, index) => {
@@ -35,7 +37,7 @@ class Card extends React.Component {
 						);
 					})}
 				</div>
-				<h2 className="m-card__connection">Connects to {Names[card.connection]}</h2>
+				<div className="m-card__connection">Connects to <span className="a-type">{Names[card.connection]}</span></div>
 			</li>
 		);
 	}
