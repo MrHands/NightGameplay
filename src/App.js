@@ -22,7 +22,6 @@ class App extends React.Component {
 			logBook: [],
 			captain: new Player('captain', Names['captain'], this.logEvent),
 			crew: new Player('crew', Names['crew'], this.logEvent),
-			cardLink: '',
 			tableCardLeft: '',
 			tableCardRight: '',
 			tableCards: [],
@@ -126,7 +125,14 @@ class App extends React.Component {
 	}
 
 	playCard(event) {
-		let { captain, crew, streak, turn, tableCards, cardLink } = this.state;
+		let {
+			captain,
+			crew,
+			streak,
+			turn,
+			tableCards,
+			tableCardLeft
+		} = this.state;
 
 		let cardId = event.target.getAttribute('card-id');
 		let cardPlayed = CardsDatabase.cards.find((c) => c.id === cardId);
@@ -143,14 +149,12 @@ class App extends React.Component {
 			}
 		}
 
-		let cardEffects = this.getActiveEffectBlock(cardPlayed);
-
 		// check if streak continues
 
-		if (cardLink !== '') {
+		if (tableCardLeft !== '') {
 			let streakFrom = streak;
 
-			let cardPrevious = CardsDatabase.cards.find((c) => c.id === cardLink);
+			let cardPrevious = CardsDatabase.cards.find((c) => c.id === tableCardLeft);
 			if (cardPrevious.connection === cardPlayed.type) {
 				this.logEvent(`Connect: Previous connection ${cardPrevious.connection} matches new ${cardPlayed.type} card`);
 	
@@ -161,9 +165,15 @@ class App extends React.Component {
 				streak = 0;
 				this.logEvent(`Streak: Broken (${streakFrom} => ${streak})`);
 			}
+
+			// discard previous card
+
+			this.discard(tableCardLeft);
 		}
 
 		// apply card effects to players
+
+		let cardEffects = this.getActiveEffectBlock(cardPlayed);
 
 		this.logEvent(`Card: Applying ${cardId} to ${Names['captain']}`);
 		captain.applyEffects(cardEffects, turn, streak);
@@ -190,9 +200,9 @@ class App extends React.Component {
 		this.setState({
 			crew: crew,
 			captain: captain,
+			tableCardLeft: '',
 			tableCardRight: cardId,
 			tableCards: tableCards,
-			cardLink: '',
 			streak: streak
 		});
 	}
@@ -210,13 +220,17 @@ class App extends React.Component {
 	}
 
 	nextTurn() {
-		let { captain, crew, tableCardLeft, tableCards, tableCardRight, round, turn, streak } = this.state;
+		let {
+			captain,
+			crew,
+			tableCards,
+			tableCardRight,
+			round,
+			turn,
+			streak
+		} = this.state;
 
 		// add cards to discard pile
-
-		if (tableCardLeft !== '') {
-			this.discard(tableCardLeft);
-		}
 
 		tableCards.splice(0, tableCards.length - 1).forEach((card) => {
 			this.discard(card);
@@ -246,7 +260,6 @@ class App extends React.Component {
 			tableCardLeft: tableCardRight,
 			tableCardRight: '',
 			tableCards: [],
-			cardLink: tableCardRight,
 			round: round,
 			turn: turn,
 			streak: streak,
@@ -261,7 +274,6 @@ class App extends React.Component {
 			tableCardLeft,
 			tableCardRight,
 			tableCards,
-			cardLink,
 			discardPile,
 			round,
 			turn,
@@ -297,13 +309,20 @@ class App extends React.Component {
 					cardPrevious={tableCardLeft}
 					cardNext={tableCardRight}
 					tableCards={tableCards}
-					cardLink={cardLink}
+					cardLink={tableCardLeft}
 					turn={turn}
 					streak={streak}
 					onResolve={this.handleGetActiveEffectBlock}
 				/>
 				<h1>{`${Names[turn]}'s turn`}</h1>
-				<CardHand player={player} turn={turn} streak={streak} onPlay={this.handlePlayCard} cardLink={cardLink} onResolve={this.handleGetActiveEffectBlock} />
+				<CardHand
+					player={player}
+					turn={turn}
+					streak={streak}
+					cardLink={tableCardLeft}
+					onPlay={this.handlePlayCard}
+					onResolve={this.handleGetActiveEffectBlock}
+				/>
 				<h2>{`Energy Remaining: ${player.energy}`}</h2>
 				<ul className="m-buttonBar">
 					<Button onClick={this.handleNextTurn}>
