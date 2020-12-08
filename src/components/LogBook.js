@@ -10,7 +10,7 @@ class LogBook extends React.Component {
 			<div>
 				<h2>Logbook</h2>
 				<ul className="m-logBook">
-					{logBook.map((text, index) => <li key={`entry-${index}`} className="a-logEntry">{text}</li>)}
+					{logBook.reverse().map((text, index) => <li key={`entry-${index}`} className="a-logEntry">{text}</li>)}
 				</ul>
 			</div>
 		);
