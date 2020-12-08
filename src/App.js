@@ -123,7 +123,7 @@ class App extends React.Component {
 		} = this.state;
 
 		let cardId = event.target.getAttribute('card-id');
-		let handId = event.target.getAttribute('card-hand-id');
+		let handId = Number(event.target.getAttribute('card-hand-id'));
 		let cardPlayed = CardsDatabase.cards.find((c) => c.id === cardId);
 
 		// check if card can be played

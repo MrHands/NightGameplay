@@ -14,6 +14,7 @@ class Player {
 		this.deckName = null;
 		this.deckCards = [];
 		this.hand = [];
+		this.discarded = [];
 	}
 
 	shuffleCards(cards) {
@@ -31,39 +32,50 @@ class Player {
 		this.deckName = deckName;
 		let deckCards = this.shuffleCards(DeckDatabase.decks.find((deck) => deck.id === deckName).cards);
 
-		this.deckCards = [];
-		deckCards.forEach((card, index) => {
-			this.deckCards.push({
+		this.deckCards = deckCards.map((card, index) => {
+			return {
 				id: card,
 				handId: index
-			});
+			};
 		});
 	}
 
 	endTurn() {
+		// discard cards from hand
+
+		this.hand.forEach(card => {
+			this.discarded.push(card);
+		});
+
+		this.hand = [];
+
 		// check if deck has enough cards
 
 		console.log(`${this.id} ${this.deckCards.length}`);
 
 		if (this.deckCards.length < 5) {
-			this.setupDeck(this.deckName);
+			this.discarded.forEach(card => {
+				this.deckCards.push(card);
+			});
+			this.discarded = [];
+
+			this.deckCards = this.shuffleCards(this.deckCards);
 		}
 
 		// fill hand from deck
-
-		this.hand = [];
-		let indices = [];
 
 		let cardList = this.deckCards.slice(0, 5);
 		cardList.forEach(card => {
 			this.logEvent(`Hand: Added ${card.id} to ${Names[this.id]}`);
 
 			this.hand.push(card);
-
-			indices.push(card.id);
 		});
 
 		this.deckCards = this.deckCards.slice(5);
+
+		console.log(this.hand);
+		console.log(this.deckCards);
+		console.log(this.discarded);
 
 		// reset energy
 
@@ -81,9 +93,15 @@ class Player {
 
 		this.energy -= card.energy;
 
+		// add to discarded
+
+		this.discarded.push(this.hand.find(card => {
+			return card.handId === handId;
+		}));
+
 		// remove from hand
 
-		this.hand = this.hand.filter(c => c.handId !== Number(handId));
+		this.hand = this.hand.filter(c => c.handId !== handId);
 
 		return true;
 	}
