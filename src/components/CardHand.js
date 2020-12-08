@@ -7,6 +7,7 @@ import './CardHand.css';
 class CardHand extends React.Component {
 	render() {
 		const {
+			cards,
 			player,
 			turn,
 			streak,
@@ -17,7 +18,7 @@ class CardHand extends React.Component {
 
 		return (
 			<ul className="m-cardHand">
-				{player.hand.map((card, index) => {
+				{cards.map((card, index) => {
 					return (
 						<Card
 							key={`card-${index}`}

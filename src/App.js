@@ -6,6 +6,7 @@ import HowToPlay from './components/HowToPlay';
 import Hud from './components/Hud';
 import LogBook from './components/LogBook';
 import Gameplay from './components/Gameplay';
+import GameOver from './components/GameOver';
 import Player from './Player';
 
 import CardsDatabase from './data/CardsDatabase.json';
@@ -26,6 +27,7 @@ class App extends React.Component {
 			tableCards: [],
 			discardPile: [],
 			round: 0,
+			winner: null,
 			turn: 'captain',
 			streak: 0,
 		};
@@ -34,6 +36,7 @@ class App extends React.Component {
 
 		this.handlePlayCard = this.playCard.bind(this);
 		this.handleNextTurn = this.nextTurn.bind(this);
+		this.handleGameOver = this.gameOver.bind(this);
 		this.handleStartNewGame = this.startNewGame.bind(this);
 		this.handleGetActiveEffectBlock = this.getActiveEffectBlock.bind(this);
 	}
@@ -210,6 +213,7 @@ class App extends React.Component {
 
 	nextTurn() {
 		let {
+			winner,
 			captain,
 			crew,
 			tableCards,
@@ -224,6 +228,26 @@ class App extends React.Component {
 		tableCards.splice(0, tableCards.length - 1).forEach((card) => {
 			this.discard(card);
 		});
+
+		// check win condition
+
+		if (captain.arousal >= captain.maxArousal) {
+			winner = captain;
+
+			this.setState({
+				winner: winner
+			});
+
+			return;
+		} else if (crew.arousal >= crew.maxArousal) {
+			winner = crew;
+
+			this.setState({
+				winner: winner
+			});
+
+			return;
+		}
 
 		// change leading player
 
@@ -255,6 +279,25 @@ class App extends React.Component {
 		});
 	}
 
+	gameOver() {
+		let {
+			captain,
+			crew,
+			winner,
+			turn
+		} = this.state;
+
+		if (turn === 'captain') {
+			winner = captain;
+		} else {
+			winner = crew;
+		}
+
+		this.setState({
+			winner: winner
+		});
+	}
+
 	render() {
 		const {
 			logBook,
@@ -265,9 +308,27 @@ class App extends React.Component {
 			tableCards,
 			discardPile,
 			round,
+			winner,
 			turn,
 			streak
 		} = this.state;
+
+		// game over
+
+		if (winner) {
+			return (
+				<React.Fragment>
+					<GameOver
+						winner={winner}
+						captain={captain}
+						crew={crew}
+						streak={streak}
+					/>
+				</React.Fragment>
+			);
+		}
+
+		// game start
 
 		if (round === 0) {
 			return (
@@ -283,6 +344,8 @@ class App extends React.Component {
 				</React.Fragment>
 			);
 		}
+
+		// gameplay
 
 		let player = (turn === 'captain') ? captain : crew;
 
@@ -305,6 +368,7 @@ class App extends React.Component {
 				/>
 				<h1>{`${Names[turn]}'s turn`}</h1>
 				<CardHand
+					cards={player.hand}
 					player={player}
 					turn={turn}
 					streak={streak}
@@ -316,6 +380,9 @@ class App extends React.Component {
 				<ul className="m-buttonBar">
 					<Button onClick={this.handleNextTurn}>
 						End turn
+					</Button>
+					<Button onClick={this.handleGameOver}>
+						Game over
 					</Button>
 				</ul>
 				<div className="o-explain">

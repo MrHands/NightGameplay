@@ -15,6 +15,7 @@ class Player {
 		this.deckCards = [];
 		this.hand = [];
 		this.discarded = [];
+		this.played = [];
 	}
 
 	shuffleCards(cards) {
@@ -85,6 +86,8 @@ class Player {
 	playCard(card, handId) {
 		this.logEvent(`Playing: ${Names[this.id]} played ${card.id}`);
 
+		// check energy cost
+
 		if (this.energy < card.energy) {
 			this.logEvent(`Not enough energy left to play card.`);
 
@@ -93,7 +96,11 @@ class Player {
 
 		this.energy -= card.energy;
 
-		// add to discarded
+		// add to played cards
+
+		this.played.push(card.id);
+
+		// add to discard pile
 
 		this.discarded.push(this.hand.find(card => {
 			return card.handId === handId;
