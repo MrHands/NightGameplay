@@ -10,6 +10,7 @@ import './GameOver.css';
 class GameOver extends React.Component {
 	render() {
 		const {
+			winner,
 			captain,
 			crew,
 			streak
@@ -31,6 +32,9 @@ class GameOver extends React.Component {
 
 		return (
 			<React.Fragment>
+				<div className="m-victory">
+					<h1 className="m-victory__title">{`Bliss achieved by ${Names[winner.id]}`}</h1>
+				</div>
 				<Hud
 					captain={captain}
 					crew={crew}
@@ -53,7 +57,7 @@ class GameOver extends React.Component {
 							streak={1}
 						/>
 					</div>
-			</section>
+				</section>
 			</React.Fragment>
 		);
 	}

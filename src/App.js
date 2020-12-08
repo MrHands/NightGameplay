@@ -88,15 +88,20 @@ class App extends React.Component {
 	}
 
 	startNewGame() {
-		let { captain, crew } = this.state;
+		let {
+			captain,
+			crew
+		} = this.state;
 
 		this.logEvent(`New game started`);
 
 		// set up players
 
+		captain.arousal = 0;
 		captain.setupDeck('captain');
 		captain.endTurn();
 
+		crew.arousal = 0;
 		crew.setupDeck('crew');
 		crew.endTurn();
 
@@ -104,14 +109,19 @@ class App extends React.Component {
 
 		this.logEvent('ROUND 1');
 
-		// crew member starts
+		// start the game
 
 		this.setState({
 			round: 1,
 			turn: 'captain',
 			streak: 0,
+			winner: null,
 			captain: captain,
-			crew: crew
+			crew: crew,
+			tableCardLeft: '',
+			tableCardRight: '',
+			tableCards: [],
+			discardPile: [],
 		});
 	}
 
@@ -232,17 +242,25 @@ class App extends React.Component {
 		// check win condition
 
 		if (captain.arousal >= captain.maxArousal) {
+			crew.energy = 100;
+			captain.energy = 100;
 			winner = captain;
 
 			this.setState({
+				captain: captain,
+				crew: crew,
 				winner: winner
 			});
 
 			return;
 		} else if (crew.arousal >= crew.maxArousal) {
+			crew.energy = 100;
+			captain.energy = 100;
 			winner = crew;
 
 			this.setState({
+				captain: captain,
+				crew: crew,
 				winner: winner
 			});
 
@@ -293,9 +311,9 @@ class App extends React.Component {
 			winner = crew;
 		}
 
-		this.setState({
-			winner: winner
-		});
+		winner.arousal = winner.maxArousal;
+
+		this.nextTurn();
 	}
 
 	render() {
@@ -324,6 +342,11 @@ class App extends React.Component {
 						crew={crew}
 						streak={streak}
 					/>
+					<ul className="m-buttonBar">
+						<Button onClick={this.handleStartNewGame}>
+							Start new game
+						</Button>
+					</ul>
 				</React.Fragment>
 			);
 		}

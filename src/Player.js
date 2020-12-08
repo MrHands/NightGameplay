@@ -31,7 +31,9 @@ class Player {
 
 	setupDeck(deckName) {
 		this.deckName = deckName;
-		let deckCards = this.shuffleCards(DeckDatabase.decks.find((deck) => deck.id === deckName).cards);
+
+		let deck = DeckDatabase.decks.find((deck) => deck.id === deckName);
+		let deckCards = this.shuffleCards([...deck.cards]);
 
 		this.deckCards = deckCards.map((card, index) => {
 			return {
