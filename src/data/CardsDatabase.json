@@ -121,8 +121,7 @@
 			"effects": [
 				{
 					"stats": {
-						"captain": 1,
-						"crew": -1
+						"crew": 1
 					}
 				}
 			]
@@ -136,8 +135,8 @@
 			"effects": [
 				{
 					"stats": {
-						"captain": 2,
-						"crew": -2
+						"captain": -1,
+						"crew": 2
 					}
 				}
 			]
@@ -151,8 +150,8 @@
 			"effects": [
 				{
 					"stats": {
-						"captain": 3,
-						"crew": -3
+						"captain": -2,
+						"crew": 3
 					}
 				}
 			]
@@ -166,8 +165,8 @@
 			"effects": [
 				{
 					"stats": {
-						"captain": 4,
-						"crew": -4
+						"captain": -3,
+						"crew": 4
 					}
 				}
 			]
@@ -293,8 +292,7 @@
 			"effects": [
 				{
 					"stats": {
-						"crew": 1,
-						"captain": -1
+						"captain": 1
 					}
 				}
 			]
@@ -308,8 +306,8 @@
 			"effects": [
 				{
 					"stats": {
-						"crew": 2,
-						"captain": -2
+						"crew": -1,
+						"captain": 2
 					}
 				}
 			]
@@ -323,8 +321,8 @@
 			"effects": [
 				{
 					"stats": {
-						"crew": 3,
-						"captain": -3
+						"crew": -2,
+						"captain": 3
 					}
 				}
 			]
@@ -338,8 +336,8 @@
 			"effects": [
 				{
 					"stats": {
-						"crew": 4,
-						"captain": -4
+						"crew": -3,
+						"captain": 4
 					}
 				}
 			]
