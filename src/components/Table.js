@@ -8,6 +8,7 @@ class Table extends React.Component {
 	render() {
 		const {
 			cardPrevious,
+			cardLink,
 			tableCards,
 			turn, 
 			streak,
@@ -16,7 +17,7 @@ class Table extends React.Component {
 
 		let previous;
 		if (cardPrevious) {
-			previous = <Card id={cardPrevious} turn={turn} streak={streak} onResolve={onResolve} />;
+			previous = <Card id={cardPrevious} linkFrom={cardLink} turn={turn} streak={streak} onResolve={onResolve} />;
 		}
 
 		return (

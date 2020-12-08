@@ -14,7 +14,8 @@ class Card extends React.Component {
 			player,
 			turn,
 			streak,
-			cardLink,
+			linkFrom,
+			linkTo,
 			isDiscarded,
 			onPlay,
 			onResolve
@@ -31,18 +32,19 @@ class Card extends React.Component {
 		let active = onResolve ? onResolve(card) : null;
 		let isTooExpensive = player ? (player.energy < card.energy) : false;
 
-		let isLinked = false;
-		if (cardLink) {
-			let found = CardsDatabase.cards.find((card) => card.id === cardLink);
-			console.log(`cardLink ${cardLink} ${found}`);
-			isLinked = found.connection === card.type;
+		let isLinkedFrom = linkFrom === id;
+
+		let isLinkedTo = false;
+		if (linkTo) {
+			let found = CardsDatabase.cards.find((card) => card.id === linkTo);
+			isLinkedTo = found.connection === card.type;
 		}
 
 		return (
 			<li className={`m-card ${isDiscarded ? ' -discarded' : ''}`} disabled={isTooExpensive} card-id={card.id} onClickCapture={onPlay}>
 				<h1 className="m-card__title">{card.title}</h1>
 				<div className="m-card__type">
-					<span className={`a-type ${isLinked ? ' -link' : ''}`}>{Names[card.type]}</span>
+					<span className={`a-type ${isLinkedTo ? ' -link' : ''}`}>{Names[card.type]}</span>
 				</div>
 				<h2 className="m-card__energy">Energy Cost {card.energy}</h2>
 				<div className="m-card__effects">
@@ -53,7 +55,7 @@ class Card extends React.Component {
 						);
 					})}
 				</div>
-				<div className="m-card__connection">Connects to <span className="a-type">{Names[card.connection]}</span></div>
+				<div className="m-card__connection">Connects to <span className={`a-type ${isLinkedFrom ? ' -link' : ''}`}>{Names[card.connection]}</span></div>
 			</li>
 		);
 	}

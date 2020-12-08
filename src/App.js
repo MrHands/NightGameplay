@@ -127,22 +127,42 @@ class App extends React.Component {
 	}
 
 	playCard(event) {
-		let { captain, crew, streak, turn, tableCards } = this.state;
+		let { captain, crew, streak, turn, tableCards, cardLink } = this.state;
 
 		let cardId = event.target.getAttribute('card-id');
-		let card = CardsDatabase.cards.find((c) => c.id === cardId);
+		let cardPlayed = CardsDatabase.cards.find((c) => c.id === cardId);
+
+		// check if card can be played
 
 		if (turn === 'captain') {
-			if (!captain.playCard(card)) {
+			if (!captain.playCard(cardPlayed)) {
 				return;
 			}
 		} else {
-			if (!crew.playCard(card)) {
+			if (!crew.playCard(cardPlayed)) {
 				return;
 			}
 		}
 
-		let cardEffects = this.getActiveEffectBlock(card);
+		let cardEffects = this.getActiveEffectBlock(cardPlayed);
+
+		// check if streak continues
+
+		if (cardLink !== '') {
+			let streakFrom = streak;
+
+			let cardPrevious = CardsDatabase.cards.find((c) => c.id === cardLink);
+			if (cardPrevious.connection === cardPlayed.type) {
+				this.logEvent(`Connect: Previous connection ${cardPrevious.connection} matches new ${cardPlayed.type} card`);
+	
+				this.logEvent(`Streak: Continued (${streakFrom} => ${streak})`);
+			} else {
+				this.logEvent(`Connect: Previous connection ${cardPrevious.connection} does not match new ${cardPlayed.type} card`);
+	
+				streak = 0;
+				this.logEvent(`Streak: Broken (${streakFrom} => ${streak})`);
+			}
+		}
 
 		// apply card effects to players
 
@@ -192,22 +212,6 @@ class App extends React.Component {
 
 	nextTurn() {
 		let { captain, crew, tableCardLeft, tableCards, tableCardRight, round, turn, streak } = this.state;
-
-		/*// check streak
-
-		let streakFrom = streak;
-
-		if (cardTableLeft.connection === cardTableRight.type) {
-			this.logEvent(`Connect: Previous connection ${cardTableLeft.connection} matches new ${cardTableRight.type} card`);
-
-			streak += 1;
-			this.logEvent(`Streak: Continued (${streakFrom} => ${streak})`);
-		} else {
-			this.logEvent(`Connect: Previous connection ${cardTableLeft.connection} does not match new ${cardTableRight.type} card`);
-
-			streak = 1;
-			this.logEvent(`Streak: Broken (${streakFrom} => ${streak})`);
-		}*/
 
 		// add cards to discard pile
 
@@ -264,8 +268,6 @@ class App extends React.Component {
 			turn,
 			streak
 		} = this.state;
-
-		console.log(cardLink);
 
 		if (round === 0) {
 			return (
