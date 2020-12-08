@@ -11,7 +11,8 @@ class Player {
 		this.arousal = 0;
 		this.maxArousal = 30;
 		this.energy = 5;
-		this.deck = [];
+		this.deckName = null;
+		this.deckCards = [];
 		this.hand = [];
 	}
 
@@ -27,11 +28,12 @@ class Player {
 	}
 
 	setupDeck(deckName) {
+		this.deckName = deckName;
 		let deckCards = this.shuffleCards(DeckDatabase.decks.find((deck) => deck.id === deckName).cards);
 
-		this.deck = [];
+		this.deckCards = [];
 		deckCards.forEach((card, index) => {
-			this.deck.push({
+			this.deckCards.push({
 				id: card,
 				handId: index
 			});
@@ -39,12 +41,20 @@ class Player {
 	}
 
 	endTurn() {
+		// check if deck has enough cards
+
+		console.log(`${this.id} ${this.deckCards.length}`);
+
+		if (this.deckCards.length < 5) {
+			this.setupDeck(this.deckName);
+		}
+
 		// fill hand from deck
 
 		this.hand = [];
 		let indices = [];
 
-		let cardList = this.deck.slice(0, 5);
+		let cardList = this.deckCards.slice(0, 5);
 		cardList.forEach(card => {
 			this.logEvent(`Hand: Added ${card.id} to ${Names[this.id]}`);
 
@@ -53,7 +63,7 @@ class Player {
 			indices.push(card.id);
 		});
 
-		this.deck = this.deck.filter(card => indices.indexOf(card.id) === -1);
+		this.deckCards = this.deckCards.slice(5);
 
 		// reset energy
 
