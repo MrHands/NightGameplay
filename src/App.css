@@ -1,7 +1,12 @@
 #root {
 	display: grid;
-	grid-row-gap: 16px;
-	padding: 12px;
+	grid-row-gap: 8px;
+	padding: 8px;
+}
+
+h1, h2, h3 {
+	margin: 0;
+	margin-bottom: 12px;
 }
 
 .m-buttonBar {
