@@ -8,9 +8,10 @@ class Player {
 		this.name = name;
 		this.logEvent = logEvent;
 		this.leading = false;
-		this.arousal = 0;
 		this.maxArousal = 30;
-		this.energy = 5;
+		this.arousal = 0;
+		this.maxEnergy = 5;
+		this.energy = this.maxEnergy;
 		this.deckName = null;
 		this.deckCards = [];
 		this.hand = [];
@@ -82,7 +83,7 @@ class Player {
 
 		// reset energy
 
-		this.energy = 5;
+		this.energy = this.maxEnergy;
 	}
 
 	playCard(card, handId) {

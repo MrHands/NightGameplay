@@ -1,12 +1,12 @@
 import React from 'react';
 
 import Button from './components/Button';
-import CardHand from './components/CardHand';
 import HowToPlay from './components/HowToPlay';
 import Hud from './components/Hud';
 import LogBook from './components/LogBook';
 import Gameplay from './components/Gameplay';
 import GameOver from './components/GameOver';
+import PlayerBar from './components/PlayerBar';
 import Player from './Player';
 
 import CardsDatabase from './data/CardsDatabase.json';
@@ -391,9 +391,7 @@ class App extends React.Component {
 					streak={streak}
 					onResolve={this.handleGetActiveEffectBlock}
 				/>
-				<h1>{`${Names[turn]}'s turn`}</h1>
-				<CardHand
-					cards={player.hand}
+				<PlayerBar
 					player={player}
 					turn={turn}
 					streak={streak}
@@ -401,7 +399,6 @@ class App extends React.Component {
 					onPlay={this.handlePlayCard}
 					onResolve={this.handleGetActiveEffectBlock}
 				/>
-				<h2>{`Energy Remaining: ${player.energy}`}</h2>
 				<ul className="m-buttonBar">
 					<Button onClick={this.handleNextTurn}>
 						End turn
