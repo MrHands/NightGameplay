@@ -6,7 +6,7 @@
 }
 
 .a-type.-link {
-	background: pink;
+	background: plum;
 }
 
 .m-card {
@@ -22,8 +22,19 @@
 	min-width: 200px;
 	min-height: 300px;
 	padding: 12px;
-	border: 2px solid blue;
+	background: none;
+	border: 2px solid goldenrod;
 	border-radius: 12px;
+}
+
+.m-card.-captain {
+	background: lavender;
+	border-color: blue;
+}
+
+.m-card.-crew {
+	background: pink;
+	border-color: hotpink;
 }
 
 .m-card__title {
@@ -64,6 +75,7 @@
 /* empty card */
 
 .m-card.-none {
+	background: none;
 	border-style: dashed;
 }
 
@@ -73,6 +85,7 @@
 	display: flex;
 	min-width: auto;
 	min-height: auto;
+	background: lightgray;
 	color: gray;
 	border-color: gray;
 	margin-bottom: 12px;

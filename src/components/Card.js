@@ -32,6 +32,7 @@ class Card extends React.Component {
 
 		let active = onResolve ? onResolve(card) : null;
 		let isTooExpensive = player ? (player.energy < card.energy) : false;
+		let playerClass = player ? (' -' + player.id) : '';
 
 		let isLinkedFrom = linkFrom === id;
 
@@ -42,7 +43,7 @@ class Card extends React.Component {
 		}
 
 		return (
-			<li className={`m-card ${isDiscarded ? ' -discarded' : ''}`} disabled={isTooExpensive} card-id={card.id} card-hand-id={handId} onClickCapture={onPlay}>
+			<li className={`m-card${playerClass}${isDiscarded ? ' -discarded' : ''}`} disabled={isTooExpensive} card-id={card.id} card-hand-id={handId} onClickCapture={onPlay}>
 				<h1 className="m-card__title">{card.title}</h1>
 				<div className="m-card__type">
 					<span className={`a-type ${isLinkedTo ? ' -link' : ''}`}>{Names[card.type]}</span>
