@@ -11,3 +11,10 @@
 .m_playerBar__item {
 	padding: 8px;
 }
+
+.m_playerBar__item.-energy {
+	background: orange;
+	color: white;
+	text-align: center;
+	border-radius: 24px;
+}
