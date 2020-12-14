@@ -366,6 +366,7 @@ class App extends React.Component {
 						winner={winner}
 						captain={captain}
 						crew={crew}
+						sexergy={sexergy}
 						streak={streak}
 						round={round}
 						onResolve={this.handleGetActiveEffectBlock}

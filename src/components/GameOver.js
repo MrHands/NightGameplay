@@ -13,6 +13,7 @@ class GameOver extends React.Component {
 			winner,
 			captain,
 			crew,
+			sexergy,
 			streak,
 			round,
 			onResolve,
@@ -41,6 +42,7 @@ class GameOver extends React.Component {
 					captain={captain}
 					crew={crew}
 					streak={streak}
+					sexergy={sexergy}
 				/>
 				<div className="m-victory">
 					<h1 className="m-victory__title">{`${round - 1} rounds played`}</h1>

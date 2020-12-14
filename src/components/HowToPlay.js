@@ -1,29 +1,33 @@
 import React from 'react';
 
+import Names from '../data/Names.json';
+
 import './HowToPlay.css';
 
 class HowToPlay extends React.Component {
 	render() {
+		const loca = (value) => {
+			return <b>{Names[value]}</b>;
+		}
+
 		return (
 			<div className="m-howToPlay">
 				<h2>What is this?</h2>
-				<p>This is a prototype for the night gameplay in Up There They Love, made using React.</p>
-				<p>In this prototype, you play as both the Captain and the Crew Member. In the final game, the Crew Member will be played by an AI.</p>
-				<p>Your goal is to fill the Crew Member's Arousal bar at the top of the screen. At the same time, the Crew Member is trying to fill your bar. The best outcome is for both bars to be filled at the same time.</p>
-				<p>You start each turn with five cards in your hand, drawn from your deck. You can play as many cards as you want in your turn, but each card has an energy cost. Your energy resets at the start of your turn.</p>
-				<p>Cards can have a combination of three effects: add to your Arousal, add to your partner's Arousal and add to the Streak. The Streak is used as a bonus on the Arousal effects and is shared between both players.</p>
-				<p>When you end your turn, the cards from the table and in your hand are moved to your discard pile. However, the last card you played is left on the table. The next player needs to look at what type your card connects with.</p>
-				<p>When the first card you play matches the connection type of the previous player's card, the streak is maintained. Otherwise, the streak is reset to 0. This rule does not apply to subsequent cards you play, it <i>only</i> applies to the first card of your turn.</p>
-				<p>If your deck is empty, your discard pile is reshuffled and added back to your deck.</p>
-				<p>Note that you always play two cards at the end of each round: the one that was on the table previously and the one that was just put down.</p>
+					<p>This is a prototype for the night gameplay in <i>Up There They Love</i>, made using React. The game is a combination of a visual novel, a worker placement game and a card game. You will play this card game with one of the three crew members at the end of each in-game day.</p>
+				<h2>Goals</h2>
+					<p>You have two goals in the game: fill the {loca('arousal')} of the other player before they fill yours and to try and get the highest possible {loca('sexergy')} (Sexual Energy) score.</p>
+					<p>In this prototype, you play as both the {loca('captain')} and the {loca('crew')}. In the final game, the {loca('crew')} will be played by an AI.</p>
 				<h2>How to play</h2>
-				<ul>
-					<li>Press "Start game" to start playing</li>
-					<li>Click on a card from your hand to place it on the table</li>
-					<li>Play cards until you are satisfied or when you run out of energy</li>
-					<li>Press "End Turn" to end your turn</li>
-					<li>Keep playing until the bars fill up</li>
-				</ul>
+					<p>You start each turn with five cards in your hand, drawn from your deck. Each card costs {loca('energy')} and gives you {loca('sexergy')}. You can play as many cards as you have energy left. Your {loca('energy')} resets at the start of your turn.</p>
+					<p>Cards can have a combination of three effects: add to your {loca('arousal')}, add to your partner's {loca('arousal')} and add to the {loca('streak')}. The {loca('streak')} is used as a bonus on the {loca('arousal')} effects and is shared between both players.</p>
+				<h2>Bonuses</h2>
+					<p>Each card has a type, which can be {loca('passionate')}, {loca('intimate')} or {loca('dominant')}. It also has a connection type, which specifies what type of card should ideally be played next. When the connection type of the last played card matches with the type of the card you playe, you will get a bonus for playing that card.</p>
+					<p>Whenever the connection type matches, you will get double the {loca('sexergy')} for that card. When you match the type played by the other player, the {loca('streak')} is maintained. Otherwise, it is reset to 0.</p>
+					<p>After playing the first card from your hand, the card from the previous player is discarded.</p>
+				<h2>Ending your turn</h2>
+					<p>When you end your turn, the cards from the table and in your hand are moved to your discard pile. However, the last card you played is left on the table. The next player needs to look at what type your card connects with.</p>
+				<h2>Shuffling the deck</h2>
+					<p>If your deck is empty, your discard pile is reshuffled and added back to your deck.</p>
 			</div>
 		);
 	}
