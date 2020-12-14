@@ -188,7 +188,7 @@ class App extends React.Component {
 			tablePrevious = '';
 		}
 
-		// apply card effects to streak
+		// apply card effects to global state
 
 		for (const [key, value] of Object.entries(cardEffects.stats)) {
 			if (key === 'streak') {
@@ -197,10 +197,21 @@ class App extends React.Component {
 
 				this.logEvent(`Effect: Added ${value} to ${Names['streak']} (${from} => ${streak})`);
 			} else if (key === 'sexergy') {
-				let from = sexergy;
-				sexergy += value;
+				// check for connection bonus
 
-				this.logEvent(`Effect: Added ${value} to ${Names['sexergy']} (${from} => ${sexergy})`);
+				let delta = value;
+
+				if (tableCardRight) {
+					let linked = CardsDatabase.cards.find((card) => card.id === tableCardRight);
+					if (linked.connection === cardPlayed.type) {
+						delta = value * 2;
+					}
+				}
+
+				let from = sexergy;
+				sexergy += delta;
+
+				this.logEvent(`Effect: Added ${delta} to ${Names['sexergy']} (${from} => ${sexergy})`);
 			}
 		}
 
