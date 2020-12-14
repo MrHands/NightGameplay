@@ -25,3 +25,8 @@
 	align-items: center;
 	color: white;
 }
+
+.a-progress.-reversed > .a-progress__foreground {
+	left: initial;
+	right: 0;
+}

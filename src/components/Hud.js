@@ -7,11 +7,15 @@ import './Hud.css';
 
 class Hud extends React.Component {
 	render() {
-		const { captain, crew, streak } = this.props;
+		const {
+			captain,
+			crew,
+			streak
+		} = this.props;
 
 		return (
 			<div className="o-hud">
-				<Arousal player={captain} />
+				<Arousal player={captain} reversed="1" />
 				<StreakCounter streak={streak} />
 				<Arousal player={crew} />
 			</div>

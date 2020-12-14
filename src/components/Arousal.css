@@ -3,3 +3,7 @@
 	grid-template-rows: 2fr 1fr;
 	align-items: center;
 }
+
+.m-arousal.-left {
+	justify-items: right;
+}

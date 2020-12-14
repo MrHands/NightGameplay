@@ -4,12 +4,15 @@ import './Arousal.css';
 
 class Arousal extends React.Component {
 	render() {
-		let { player } = this.props;
+		let {
+			player,
+			reversed
+		} = this.props;
 
 		return (
-			<div className="m-arousal">
-				<h2>{player.name}</h2>
-				<Progress min="0" max={player.maxArousal} value={player.arousal} />
+			<div className={`m-arousal ${reversed ? '-left' : ''}`}>
+				<h2>{player.name} Arousal</h2>
+				<Progress min="0" max={player.maxArousal} value={player.arousal} reversed={reversed} />
 			</div>
 		);
 	}

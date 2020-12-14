@@ -6,7 +6,8 @@ class Progress extends React.Component {
 		let {
 			min,
 			max,
-			value
+			value,
+			reversed
 		} = this.props;
 
 		let width = Math.min(100, ((value - min) / (max - min)) * 100);
@@ -15,7 +16,7 @@ class Progress extends React.Component {
 		};
 
 		return (
-			<div className="a-progress">
+			<div className={`a-progress ${reversed ? '-reversed' : ''}`}>
 				<div className="a-progress__foreground" style={style}></div>
 				<div className="a-progress__text">{value - min} / {max - min}</div>
 			</div>

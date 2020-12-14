@@ -123,11 +123,7 @@
 	font-size: 16px;
 }
 
-.m-card.-discarded > .m-card__type {
-	display: none;
-}
-
-.m-card.-discarded > .m-card__energy {
+.m-card.-discarded > .m-cardInfo {
 	display: none;
 }
 
