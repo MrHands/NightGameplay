@@ -213,6 +213,7 @@ class App extends React.Component {
 			tableCardLeft: '',
 			tableCardRight: cardId,
 			tableCards: tableCards,
+			sexergy: sexergy,
 			streak: streak
 		});
 	}
@@ -336,6 +337,7 @@ class App extends React.Component {
 			round,
 			winner,
 			turn,
+			sexergy,
 			streak
 		} = this.state;
 
@@ -387,6 +389,7 @@ class App extends React.Component {
 				<Hud
 					captain={captain}
 					crew={crew}
+					sexergy={sexergy}
 					streak={streak}
 				/>
 				<Gameplay

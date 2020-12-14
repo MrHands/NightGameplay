@@ -10,13 +10,14 @@ class Hud extends React.Component {
 		const {
 			captain,
 			crew,
+			sexergy,
 			streak
 		} = this.props;
 
 		return (
 			<div className="o-hud">
 				<Arousal player={captain} reversed="1" />
-				<StreakCounter streak={streak} />
+				<StreakCounter streak={streak} sexergy={sexergy} />
 				<Arousal player={crew} />
 			</div>
 		);

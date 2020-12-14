@@ -1,8 +1,10 @@
 .m-streakCounter {
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	grid-template-rows: 1fr 1fr;
 	align-items: center;
 	justify-content: center;
+	min-width: 180px;
 	background: lightgray;
 	font-size: 14px;
 	padding: 4px;
@@ -14,4 +16,5 @@
 
 .m-streakCounter__text {
 	margin: 0;
+	text-align: center;
 }
