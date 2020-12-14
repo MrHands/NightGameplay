@@ -13,8 +13,8 @@
 }
 
 .m_playerBar__item.-energy {
-	background: orange;
-	color: white;
+	background: darkorange;
+	color: black;
 	text-align: center;
 	border-radius: 24px;
 }

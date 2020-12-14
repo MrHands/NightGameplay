@@ -9,19 +9,58 @@
 	background: plum;
 }
 
+/* card info */
+
+.m-cardInfo {
+	grid-area: info;
+	display: grid;
+	grid-template-columns: min-content 1fr min-content;
+	grid-template-areas: 
+		"energy   type     sexergy  ";
+	grid-row-gap: 8px;
+	justify-items: center;
+	align-items: center;
+}
+
+.m-cardInfo__type {
+	grid-area: type;
+	margin: 0;
+	text-align: right;
+}
+
+.m-cardInfo__energy {
+	grid-area: energy;
+	text-align: center;
+	font-size: 18px;
+	background: darkorange;
+	color: black;
+	padding: 4px 8px;
+	border-radius: 24px;
+	margin: 0;
+}
+
+.m-cardInfo__sexergy {
+	grid-area: sexergy;
+	text-align: center;
+	background: pink;
+	font-size: 18px;
+	padding: 4px 8px;
+	border-radius: 24px;
+	margin: 0;
+}
+
 .m-card {
 	display: grid;
-	grid-template-columns: min-content 1fr;
 	grid-template-rows: repeat(2, min-content) 1fr min-content;
 	grid-row-gap: 8px;
 	grid-template-areas: 
-		"energy   type     "
-		"title    title    "
-		"effects  effects  "
-		"connect  connect  ";
-	min-width: 200px;
+		"info     "
+		"title    "
+		"effects  "
+		"connect  ";
+	min-width: 220px;
 	min-height: 300px;
-	padding: 12px;
+	padding: 8px;
 	background: none;
 	border: 2px solid goldenrod;
 	border-radius: 12px;
@@ -42,24 +81,6 @@
 	margin: 0;
 	font-size: 24px;
 	text-align: center;
-}
-
-.m-card__type {
-	grid-area: type;
-	margin: 0;
-	text-align: right;
-}
-
-.m-card__energy {
-	grid-area: energy;
-	text-align: center;
-	font-weight: bold;
-	font-size: 18px;
-	background: orange;
-	color: white;
-	padding: 4px 12px;
-	border-radius: 24px;
-	margin: 0;
 }
 
 .m-card__effects {

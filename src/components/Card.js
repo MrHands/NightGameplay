@@ -42,13 +42,25 @@ class Card extends React.Component {
 			isLinkedTo = found.connection === card.type;
 		}
 
+		let sexergy;
+		if (active) {
+			for (const [key, value] of Object.entries(active.stats)) {
+				if (key === 'sexergy') {
+					sexergy = <div className="m-cardInfo__sexergy">{`+${value}`}</div>
+				}
+			}
+		}
+
 		return (
 			<li className={`m-card${playerClass}${isDiscarded ? ' -discarded' : ''}`} disabled={isTooExpensive} card-id={card.id} card-hand-id={handId} onClickCapture={onPlay}>
-				<h1 className="m-card__title">{card.title}</h1>
-				<div className="m-card__type">
-					<span className={`a-type ${isLinkedTo ? ' -link' : ''}`}>{Names[card.type]}</span>
+				<div className="m-cardInfo">
+					<div className="m-cardInfo__energy">{`⚡${card.energy}`}</div>
+					<div className="m-cardInfo__type">
+						<span className={`a-type ${isLinkedTo ? ' -link' : ''}`}>{Names[card.type]}</span>
+					</div>
+					{sexergy}
 				</div>
-				<h2 className="m-card__energy">{card.energy}</h2>
+				<h1 className="m-card__title">{card.title}</h1>
 				<div className="m-card__effects">
 					{card.effects.map((effect, index) => {
 						let isActive = effect === active;
