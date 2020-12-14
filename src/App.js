@@ -29,6 +29,7 @@ class App extends React.Component {
 			round: 0,
 			winner: null,
 			turn: 'captain',
+			sexergy: 0,
 			streak: 0,
 		};
 
@@ -114,6 +115,7 @@ class App extends React.Component {
 		this.setState({
 			round: 1,
 			turn: 'captain',
+			sexergy: 0,
 			streak: 0,
 			winner: null,
 			captain: captain,
@@ -129,6 +131,7 @@ class App extends React.Component {
 		let {
 			captain,
 			crew,
+			sexergy,
 			streak,
 			turn,
 			tableCards,
@@ -190,6 +193,11 @@ class App extends React.Component {
 				streak += value;
 
 				this.logEvent(`Effect: Added ${value} to ${Names['streak']} (${from} => ${streak})`);
+			} else if (key === 'sexergy') {
+				let from = sexergy;
+				sexergy += value;
+
+				this.logEvent(`Effect: Added ${value} to ${Names['sexergy']} (${from} => ${sexergy})`);
 			}
 		}
 

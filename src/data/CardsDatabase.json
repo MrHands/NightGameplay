@@ -9,7 +9,8 @@
 			"effects": [
 				{
 					"stats": {
-						"crew": 1
+						"crew": 1,
+						"sexergy": 2
 					}
 				}
 			]
@@ -23,7 +24,8 @@
 			"effects": [
 				{
 					"stats": {
-						"crew": 2
+						"crew": 2,
+						"sexergy": 4
 					}
 				}
 			]
@@ -37,7 +39,8 @@
 			"effects": [
 				{
 					"stats": {
-						"crew": 3
+						"crew": 3,
+						"sexergy": 6
 					}
 				}
 			]
@@ -51,7 +54,8 @@
 			"effects": [
 				{
 					"stats": {
-						"crew": 4
+						"crew": 4,
+						"sexergy": 8
 					}
 				}
 			]
@@ -65,7 +69,8 @@
 			"effects": [
 				{
 					"stats": {
-						"streak": 1
+						"streak": 1,
+						"sexergy": 2
 					}
 				}
 			]
@@ -79,7 +84,8 @@
 			"effects": [
 				{
 					"stats": {
-						"streak": 2
+						"streak": 2,
+						"sexergy": 2
 					}
 				}
 			]
@@ -93,7 +99,8 @@
 			"effects": [
 				{
 					"stats": {
-						"streak": 3
+						"streak": 3,
+						"sexergy": 2
 					}
 				}
 			]
@@ -107,7 +114,8 @@
 			"effects": [
 				{
 					"stats": {
-						"streak": 4
+						"streak": 4,
+						"sexergy": 2
 					}
 				}
 			]
@@ -121,7 +129,8 @@
 			"effects": [
 				{
 					"stats": {
-						"crew": 1
+						"crew": 1,
+						"sexergy": 4
 					}
 				}
 			]
@@ -136,7 +145,8 @@
 				{
 					"stats": {
 						"captain": -1,
-						"crew": 2
+						"crew": 2,
+						"sexergy": 3
 					}
 				}
 			]
@@ -151,7 +161,8 @@
 				{
 					"stats": {
 						"captain": -2,
-						"crew": 3
+						"crew": 3,
+						"sexergy": 2
 					}
 				}
 			]
@@ -166,7 +177,8 @@
 				{
 					"stats": {
 						"captain": -3,
-						"crew": 4
+						"crew": 4,
+						"sexergy": 1
 					}
 				}
 			]
@@ -180,7 +192,8 @@
 			"effects": [
 				{
 					"stats": {
-						"captain": 2
+						"captain": 2,
+						"sexergy": 2
 					}
 				}
 			]
@@ -194,7 +207,8 @@
 			"effects": [
 				{
 					"stats": {
-						"captain": 2
+						"captain": 2,
+						"sexergy": 4
 					}
 				}
 			]
@@ -208,7 +222,8 @@
 			"effects": [
 				{
 					"stats": {
-						"captain": 3
+						"captain": 3,
+						"sexergy": 6
 					}
 				}
 			]
@@ -222,7 +237,8 @@
 			"effects": [
 				{
 					"stats": {
-						"captain": 4
+						"captain": 4,
+						"sexergy": 8
 					}
 				}
 			]
@@ -236,7 +252,8 @@
 			"effects": [
 				{
 					"stats": {
-						"streak": 1
+						"streak": 1,
+						"sexergy": 2
 					}
 				}
 			]
@@ -250,7 +267,8 @@
 			"effects": [
 				{
 					"stats": {
-						"streak": 2
+						"streak": 2,
+						"sexergy": 2
 					}
 				}
 			]
@@ -264,7 +282,8 @@
 			"effects": [
 				{
 					"stats": {
-						"streak": 3
+						"streak": 3,
+						"sexergy": 2
 					}
 				}
 			]
@@ -278,7 +297,8 @@
 			"effects": [
 				{
 					"stats": {
-						"streak": 4
+						"streak": 4,
+						"sexergy": 2
 					}
 				}
 			]
@@ -292,7 +312,8 @@
 			"effects": [
 				{
 					"stats": {
-						"captain": 1
+						"captain": 1,
+						"sexergy": 4
 					}
 				}
 			]
@@ -307,7 +328,8 @@
 				{
 					"stats": {
 						"crew": -1,
-						"captain": 2
+						"captain": 2,
+						"sexergy": 3
 					}
 				}
 			]
@@ -322,7 +344,8 @@
 				{
 					"stats": {
 						"crew": -2,
-						"captain": 3
+						"captain": 3,
+						"sexergy": 2
 					}
 				}
 			]
@@ -337,7 +360,8 @@
 				{
 					"stats": {
 						"crew": -3,
-						"captain": 4
+						"captain": 4,
+						"sexergy": 1
 					}
 				}
 			]

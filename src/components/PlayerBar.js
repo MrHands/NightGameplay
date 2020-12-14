@@ -21,7 +21,7 @@ class PlayerBar extends React.Component {
 			<React.Fragment>
 				<ul className="m-playerBar">
 					<li className="m_playerBar__item -turn">{`${Names[turn]}'s turn`}</li>
-					<li className="m_playerBar__item -energy">{`Energy: ${player.energy} / ${player.maxEnergy}`}</li>
+					<li className="m_playerBar__item -energy">{`${Names['energy']}: ${player.energy} / ${player.maxEnergy}`}</li>
 				</ul>
 				<CardHand
 					cards={player.hand}

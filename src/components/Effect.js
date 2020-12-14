@@ -6,7 +6,12 @@ import './Effect.css';
 
 class Effect extends React.Component {
 	render() {
-		const { id, effect, turn, streak } = this.props;
+		const {
+			id,
+			effect,
+			turn,
+			streak
+		} = this.props;
 
 		let title = Names[id];
 
