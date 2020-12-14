@@ -32,7 +32,7 @@ class Card extends React.Component {
 
 		let active = onResolve ? onResolve(card) : null;
 		let isTooExpensive = player ? (player.energy < card.energy) : false;
-		let playerClass = player ? (' -' + player.id) : '';
+		let playerClass = player ? (' -player -' + player.id) : '';
 
 		let isLinkedFrom = linkFrom === id;
 

@@ -2,15 +2,10 @@
 	display: grid;
 	grid-row-gap: 8px;
 	box-sizing: border-box;
-	background: lightgray;
-	color: gray;
+	background: none;
+	color: black;
 	padding: 8px;
 	border: 2px solid transparent;
-}
-
-.m-effectBlock.-active {
-	background: lightyellow;
-	color: black;
 }
 
 .m-effectBlock__condition {

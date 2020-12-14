@@ -12,6 +12,7 @@
 /* card info */
 
 .m-cardInfo {
+	transition: background-color 0.2s;
 	grid-area: info;
 	display: grid;
 	grid-template-columns: min-content 1fr min-content;
@@ -29,10 +30,11 @@
 }
 
 .m-cardInfo__energy {
+	transition: background-color 0.2s;
 	grid-area: energy;
 	text-align: center;
 	font-size: 18px;
-	background: darkorange;
+	background: none;
 	color: black;
 	padding: 4px 8px;
 	border-radius: 24px;
@@ -40,9 +42,10 @@
 }
 
 .m-cardInfo__sexergy {
+	transition: background-color 0.2s;
 	grid-area: sexergy;
 	text-align: center;
-	background: pink;
+	background: none;
 	font-size: 18px;
 	padding: 4px 8px;
 	border-radius: 24px;
@@ -50,6 +53,7 @@
 }
 
 .m-card {
+	transition: background-color 0.2s;
 	display: grid;
 	grid-template-rows: repeat(2, min-content) 1fr min-content;
 	grid-row-gap: 8px;
@@ -67,12 +71,10 @@
 }
 
 .m-card.-captain {
-	background: lavender;
 	border-color: blue;
 }
 
 .m-card.-crew {
-	background: pink;
 	border-color: hotpink;
 }
 
@@ -98,6 +100,20 @@
 
 .m-card * {
 	pointer-events: none;
+}
+
+/* hover */
+
+.m-card.-player:hover {
+	background-color: lavender;
+}
+
+.m-card.-player:hover .m-cardInfo__energy {
+	background-color: darkorange;
+}
+
+.m-card.-player:hover .m-cardInfo__sexergy {
+	background-color: pink;
 }
 
 /* empty card */
