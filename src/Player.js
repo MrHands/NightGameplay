@@ -134,9 +134,9 @@ class Player {
 				}
 			}
 
-			// console.log(`key ${key} value ${value} id ${this.id} turn ${turn}`);
+			console.log(`key ${key} effect ${effect} id ${this.id} streak ${streak}`);
 
-			if (key === this.id || (key === 'mine' && turn === this.id) || (key === 'theirs' && turn !== this.id)) {
+			if (key === this.id) {
 				let from = this.arousal;
 				let delta = Math.sign(effect) * (Math.abs(effect) + streak);
 				this.arousal = Math.max(0, this.arousal + delta);

@@ -143,6 +143,10 @@
 	display: none;
 }
 
+.m-card.-discarded > .m-cardInfo__type {
+	display: none;
+}
+
 .m-card.-discarded > .m-card__effects {
 	display: none;
 }

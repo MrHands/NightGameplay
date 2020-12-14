@@ -135,8 +135,8 @@ class App extends React.Component {
 			streak,
 			turn,
 			tableCards,
-			tableCardLeft,
 			tableCardRight,
+			tablePrevious,
 		} = this.state;
 
 		let cardId = event.target.getAttribute('card-id');
@@ -155,12 +155,21 @@ class App extends React.Component {
 			}
 		}
 
+		// apply card effects to players
+
+		let cardEffects = this.getActiveEffectBlock(cardPlayed);
+
+		this.logEvent(`Card: Applying ${cardId} to ${Names['captain']}`);
+		captain.applyEffects(cardEffects, turn, streak);
+		this.logEvent(`Card: Applying ${cardId} to ${Names['crew']}`);
+		crew.applyEffects(cardEffects, turn, streak);
+
 		// check if streak continues
 
-		if (tableCardLeft !== '' && tableCards.length <= 1) {
+		if (tablePrevious !== '') {
 			let streakFrom = streak;
 
-			let cardPrevious = CardsDatabase.cards.find((c) => c.id === tableCardLeft);
+			let cardPrevious = CardsDatabase.cards.find((c) => c.id === tablePrevious);
 			if (cardPrevious.connection === cardPlayed.type) {
 				this.logEvent(`Connect: Previous connection ${cardPrevious.connection} matches new ${cardPlayed.type} card`);
 	
@@ -172,19 +181,12 @@ class App extends React.Component {
 				this.logEvent(`Streak: Broken (${streakFrom} => ${streak})`);
 			}
 
-			// discard previous card
+			// clear previous card from table and discard
 
-			this.discard(tableCardLeft);
+			tableCards = [];
+			this.discard(tablePrevious);
+			tablePrevious = '';
 		}
-
-		// apply card effects to players
-
-		let cardEffects = this.getActiveEffectBlock(cardPlayed);
-
-		this.logEvent(`Card: Applying ${cardId} to ${Names['captain']}`);
-		captain.applyEffects(cardEffects, turn, streak);
-		this.logEvent(`Card: Applying ${cardId} to ${Names['crew']}`);
-		crew.applyEffects(cardEffects, turn, streak);
 
 		// apply card effects to streak
 
@@ -214,6 +216,7 @@ class App extends React.Component {
 			tableCardLeft: tableCardRight,
 			tableCardRight: cardId,
 			tableCards: tableCards,
+			tablePrevious: tablePrevious,
 			sexergy: sexergy,
 			streak: streak
 		});
