@@ -8,7 +8,14 @@ import './EffectBlock.css';
 
 class EffectBlock extends React.Component {
 	render() {
-		const { active, effect, turn, streak } = this.props;
+		const {
+			nameChange,
+			active,
+			effect,
+			streak,
+			isLinkedTo,
+			onResolveEffect,
+		} = this.props;
 
 		let condition;
 		if (effect.condition) {
@@ -16,17 +23,22 @@ class EffectBlock extends React.Component {
 			condition = <h2 className="m-effectBlock__condition">{Names[stat]} {Names[check]} {value}</h2>;
 		}
 
-		let effectItems = [];
-
-		for (const [key, value] of Object.entries(effect.stats)) {
-			effectItems.push(<Effect key={key} id={key} effect={value} turn={turn} streak={streak} />);
-		}
+		// console.log(`EffectBlock: nameChange ${nameChange} streak ${effect.streak}`);
 
 		return (
 			<div className={`m-effectBlock ${active ? '-active' : ''}`}>
 				{condition}
 				<ul className="a-effectList">
-					{effectItems}
+					{Object.keys(effect.stats).filter((key) => key !== 'sexergy').map((key) => {
+						return <Effect
+							key={`${nameChange}-${key}`}
+							id={key}
+							effect={effect.stats[key]}
+							streak={streak}
+							isLinkedTo={isLinkedTo}
+							onResolveEffect={onResolveEffect}
+						/>;
+					})}
 				</ul>
 			</div>
 		);

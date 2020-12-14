@@ -52,9 +52,7 @@ class App extends React.Component {
 		});
 	}
 
-	getActiveEffectBlock(card) {
-		let { streak } = this.state;
-
+	getActiveEffectBlock(card, streak) {
 		let defaultBlock = card.effects.find((effect) => {
 			return !effect.condition;
 		});

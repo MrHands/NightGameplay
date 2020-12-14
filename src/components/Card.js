@@ -8,6 +8,21 @@ import Names from '../data/Names.json';
 import './Card.css';
 
 class Card extends React.Component {
+	resolveEffect = (name, effect, streak, isLinked) => {
+		let previous = effect;
+
+		if (['captain', 'crew'].indexOf(name) > -1) {
+			effect = (Math.abs(effect) + streak) * Math.sign(effect);
+		}
+		else if (isLinked && name === 'sexergy') {
+			effect = effect * 2;
+		}
+
+		console.log(`name ${name} effect (${previous} => ${effect})`);
+
+		return effect;
+	}
+
 	render() {
 		const {
 			id,
@@ -30,7 +45,13 @@ class Card extends React.Component {
 			);
 		}
 
-		let active = onResolve ? onResolve(card) : null;
+		// resolve effects
+
+		let effects = null;
+		if (onResolve) {
+			effects = onResolve(card, streak);
+		}
+
 		let isTooExpensive = player ? (player.energy < card.energy) : false;
 		let playerClass = player ? (' -player -' + player.id) : '';
 
@@ -42,14 +63,35 @@ class Card extends React.Component {
 			isLinkedTo = found.connection === card.type;
 		}
 
-		let sexergy;
-		if (active) {
-			for (const [key, value] of Object.entries(active.stats)) {
+		// render sexergy
+
+		let eleSexergy;
+		if (effects) {
+			for (const [key, value] of Object.entries(effects.stats)) {
 				if (key === 'sexergy') {
-					sexergy = <div className="m-cardInfo__sexergy">{`+${value}`}</div>
+					eleSexergy = <div className="m-cardInfo__sexergy">{`+${value}`}</div>
 				}
 			}
 		}
+
+		// render effects
+
+		let eleEffects;
+		if (effects) {
+			eleEffects = <div className="m-card__effects">
+				<EffectBlock
+					nameChange={`effect-${streak}`}
+					effect={effects}
+					active={true}
+					turn={turn}
+					streak={streak}
+					isLinkedTo={isLinkedTo}
+					onResolveEffect={this.resolveEffect}
+				/>
+			</div>;
+		}
+
+		console.log(`${id} ${streak}`)
 
 		return (
 			<li className={`m-card${playerClass}${isDiscarded ? ' -discarded' : ''}`} disabled={isTooExpensive} card-id={card.id} card-hand-id={handId} onClickCapture={onPlay}>
@@ -58,17 +100,10 @@ class Card extends React.Component {
 					<div className="m-cardInfo__type">
 						<span className={`a-type ${isLinkedTo ? ' -link' : ''}`}>{Names[card.type]}</span>
 					</div>
-					{sexergy}
+					{eleSexergy}
 				</div>
 				<h1 className="m-card__title">{card.title}</h1>
-				<div className="m-card__effects">
-					{card.effects.map((effect, index) => {
-						let isActive = effect === active;
-						return (
-							<EffectBlock key={`effect-${index}`} effect={effect} active={isActive} turn={turn} streak={streak} />
-						);
-					})}
-				</div>
+				{eleEffects}
 				<div className="m-card__connection">Connects to <span className={`a-type ${isLinkedFrom ? ' -link' : ''}`}>{Names[card.connection]}</span></div>
 			</li>
 		);
