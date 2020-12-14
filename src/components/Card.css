@@ -1,12 +1,15 @@
 .a-type {
+	transition: background-color 0.2s;
 	font-size: 16px;
-	background: lightgray;
+	background: none;
 	padding: 4px 8px;
 	border-radius: 8px;
+	border: 2px solid lightgray;
 }
 
 .a-type.-link {
-	background: plum;
+	background-color: plum;
+	border-color: plum;
 }
 
 /* card info */
@@ -34,6 +37,7 @@
 	background: none;
 	color: black;
 	padding: 4px 8px;
+	border: 1px solid darkorange;
 	border-radius: 24px;
 	margin: 0;
 }
@@ -45,6 +49,7 @@
 	background: none;
 	font-size: 18px;
 	padding: 4px 8px;
+	border: 1px solid pink;
 	border-radius: 24px;
 	margin: 0;
 }
@@ -103,6 +108,14 @@
 }
 
 /* hover */
+
+.m-card:hover .a-type {
+	background-color: lightgray;
+}
+
+.m-card:hover .a-type.-link {
+	background-color: plum;
+}
 
 .m-card.-player:hover {
 	background-color: lavender;
