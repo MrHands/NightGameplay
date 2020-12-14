@@ -14,12 +14,9 @@
 .m-cardInfo {
 	transition: background-color 0.2s;
 	grid-area: info;
-	display: grid;
-	grid-template-columns: min-content 1fr min-content;
-	grid-template-areas: 
-		"energy   type     sexergy  ";
+	display: flex;
 	grid-row-gap: 8px;
-	justify-items: center;
+	justify-content: space-between;
 	align-items: center;
 }
 

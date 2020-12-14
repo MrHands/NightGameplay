@@ -69,7 +69,14 @@ class Card extends React.Component {
 		if (effects) {
 			for (const [key, value] of Object.entries(effects.stats)) {
 				if (key === 'sexergy') {
-					eleSexergy = <div className="m-cardInfo__sexergy">{`💓+${value}`}</div>
+					let resolved = this.resolveEffect(key, value, streak, isLinkedTo);
+
+					let valueText = `💓+${resolved}`;
+					if (resolved !== value) {
+						valueText += ' (x2)';
+					}
+
+					eleSexergy = <div className="m-cardInfo__sexergy">{valueText}</div>
 				}
 			}
 		}

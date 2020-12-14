@@ -7,7 +7,6 @@ import './Table.css';
 class Table extends React.Component {
 	render() {
 		const {
-			cardPrevious,
 			cardLink,
 			tableCards,
 			turn, 
@@ -15,16 +14,28 @@ class Table extends React.Component {
 			onResolve
 		} = this.props;
 
-		let previous;
-		if (cardPrevious) {
-			previous = <Card id={cardPrevious} linkFrom={cardLink} turn={turn} streak={streak} onResolve={onResolve} />;
-		}
+		console.log(`cardLink ${cardLink}`);
 
 		return (
 			<ul className="m-table">
-				{previous}
-				{tableCards.map((card, index) => {
-					return <Card id={card} key={`table-${index}`} turn={turn} streak={streak} onResolve={onResolve} />
+				{tableCards.slice(0, -1).map((card, index) => {
+					return <Card
+						id={card}
+						key={`card-inactive-${index}`}
+						turn={turn}
+						streak={streak}
+						onResolve={onResolve}
+					/>
+				})}
+				{tableCards.slice(-1).map((card, index) => {
+					return <Card
+						id={card}
+						key={`card-active-${index}`}
+						linkFrom={cardLink}
+						turn={turn}
+						streak={streak}
+						onResolve={onResolve}
+					/>
 				})}
 				<Card />
 			</ul>

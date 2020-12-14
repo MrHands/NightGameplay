@@ -25,6 +25,7 @@ class App extends React.Component {
 			tableCardLeft: '',
 			tableCardRight: '',
 			tableCards: [],
+			tablePrevious: '',
 			discardPile: [],
 			round: 0,
 			winner: null,
@@ -121,6 +122,7 @@ class App extends React.Component {
 			tableCardLeft: '',
 			tableCardRight: '',
 			tableCards: [],
+			tablePrevious: '',
 			discardPile: [],
 		});
 	}
@@ -133,7 +135,8 @@ class App extends React.Component {
 			streak,
 			turn,
 			tableCards,
-			tableCardLeft
+			tableCardLeft,
+			tableCardRight,
 		} = this.state;
 
 		let cardId = event.target.getAttribute('card-id');
@@ -154,7 +157,7 @@ class App extends React.Component {
 
 		// check if streak continues
 
-		if (tableCardLeft !== '') {
+		if (tableCardLeft !== '' && tableCards.length <= 1) {
 			let streakFrom = streak;
 
 			let cardPrevious = CardsDatabase.cards.find((c) => c.id === tableCardLeft);
@@ -208,7 +211,7 @@ class App extends React.Component {
 		this.setState({
 			crew: crew,
 			captain: captain,
-			tableCardLeft: '',
+			tableCardLeft: tableCardRight,
 			tableCardRight: cardId,
 			tableCards: tableCards,
 			sexergy: sexergy,
@@ -297,7 +300,8 @@ class App extends React.Component {
 			crew: crew,
 			tableCardLeft: tableCardRight,
 			tableCardRight: '',
-			tableCards: [],
+			tableCards: [ tableCardRight ],
+			tablePrevious: tableCardRight,
 			round: round,
 			turn: turn,
 			streak: streak,
@@ -382,6 +386,11 @@ class App extends React.Component {
 
 		let player = (turn === 'captain') ? captain : crew;
 
+		let cardLink;
+		if (tableCards.length > 0) {
+			cardLink = tableCards.slice(-1)[0];
+		}
+
 		return (
 			<React.Fragment>
 				<Hud
@@ -395,7 +404,7 @@ class App extends React.Component {
 					cardPrevious={tableCardLeft}
 					cardNext={tableCardRight}
 					tableCards={tableCards}
-					cardLink={tableCardLeft}
+					cardLink={cardLink}
 					turn={turn}
 					streak={streak}
 					onResolve={this.handleGetActiveEffectBlock}
@@ -404,7 +413,7 @@ class App extends React.Component {
 					player={player}
 					turn={turn}
 					streak={streak}
-					cardLink={tableCardLeft}
+					cardLink={cardLink}
 					onPlay={this.handlePlayCard}
 					onResolve={this.handleGetActiveEffectBlock}
 				/>
