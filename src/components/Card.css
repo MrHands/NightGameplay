@@ -26,7 +26,7 @@
 .m-cardInfo__type {
 	grid-area: type;
 	margin: 0;
-	text-align: right;
+	text-align: center;
 }
 
 .m-cardInfo__energy {
@@ -53,18 +53,20 @@
 }
 
 .m-card {
+	box-sizing: border-box;
 	transition: background-color 0.2s;
 	display: grid;
-	grid-template-rows: repeat(2, min-content) 1fr min-content;
-	grid-row-gap: 8px;
+	grid-template-rows: repeat(2, min-content) 1fr 2fr min-content;
+	grid-row-gap: 4px;
 	grid-template-areas: 
 		"info     "
 		"title    "
+		"type     "
 		"effects  "
 		"connect  ";
-	min-width: 220px;
-	min-height: 300px;
-	padding: 8px;
+	min-width: 240px;
+	min-height: 320px;
+	padding: 12px;
 	background: none;
 	border: 2px solid goldenrod;
 	border-radius: 12px;
@@ -81,6 +83,7 @@
 .m-card__title {
 	grid-area: title;
 	margin: 0;
+	margin-bottom: 8px;
 	font-size: 24px;
 	text-align: center;
 }

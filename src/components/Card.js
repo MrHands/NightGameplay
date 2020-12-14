@@ -69,7 +69,7 @@ class Card extends React.Component {
 		if (effects) {
 			for (const [key, value] of Object.entries(effects.stats)) {
 				if (key === 'sexergy') {
-					eleSexergy = <div className="m-cardInfo__sexergy">{`+${value}`}</div>
+					eleSexergy = <div className="m-cardInfo__sexergy">{`💓+${value}`}</div>
 				}
 			}
 		}
@@ -97,12 +97,12 @@ class Card extends React.Component {
 			<li className={`m-card${playerClass}${isDiscarded ? ' -discarded' : ''}`} disabled={isTooExpensive} card-id={card.id} card-hand-id={handId} onClickCapture={onPlay}>
 				<div className="m-cardInfo">
 					<div className="m-cardInfo__energy">{`⚡${card.energy}`}</div>
-					<div className="m-cardInfo__type">
-						<span className={`a-type ${isLinkedTo ? ' -link' : ''}`}>{Names[card.type]}</span>
-					</div>
 					{eleSexergy}
 				</div>
 				<h1 className="m-card__title">{card.title}</h1>
+				<div className="m-cardInfo__type">
+					<span className={`a-type ${isLinkedTo ? ' -link' : ''}`}>{Names[card.type]}</span>
+				</div>
 				{eleEffects}
 				<div className="m-card__connection">Connects to <span className={`a-type ${isLinkedFrom ? ' -link' : ''}`}>{Names[card.connection]}</span></div>
 			</li>
